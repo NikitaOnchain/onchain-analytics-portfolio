@@ -1,0 +1,16 @@
+[
+  {
+    "block_timestamp": "2023-03-23T13:01:22Z",
+    "transaction_hash": "0x324f2ef46287a4f51a70e2a17ecd9a68af8f4c94c1eed0da16fa1e20992cb15a",
+    "log_index": 0,
+    "address": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+    "event_hash": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "event_signature": "Transfer(address,address,uint256)",
+    "args": [
+      "0x67a24ce4321ab3af51c2d0a4801c3e111d88c9d9",
+      "0x27a1b27b2e8bfdd57a3049415dcf6a63ac11667f",
+      "1625000000000000000000"
+    ],
+    "removed": false
+  }
+]

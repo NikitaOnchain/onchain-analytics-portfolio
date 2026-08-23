@@ -1,0 +1,82 @@
+[
+  {
+    "block_timestamp": "2023-03-23T13:01:22Z",
+    "transaction_hash": "0x324f2ef46287a4f51a70e2a17ecd9a68af8f4c94c1eed0da16fa1e20992cb15a",
+    "log_index": 0,
+    "recipient": "0x27a1b27b2e8bfdd57a3049415dcf6a63ac11667f",
+    "amount_raw": "1625000000000000000000",
+    "amount_arb": "1625"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:28Z",
+    "transaction_hash": "0x729e9b4a39d9e5026ec9b931268378215ad246f82b58016e95dbbfbe4145f023",
+    "log_index": 0,
+    "recipient": "0x596aca03d432e0b869494c5e82584dae218e95a4",
+    "amount_raw": "875000000000000000000",
+    "amount_arb": "875"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:34Z",
+    "transaction_hash": "0x286a8e0045c41d70549cae998e56dc69b4bd516f88191cbf718940aa9e1df391",
+    "log_index": 0,
+    "recipient": "0x8d5614611aa239c680b4ff33a5594c669bddf9c6",
+    "amount_raw": "1125000000000000000000",
+    "amount_arb": "1125"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:34Z",
+    "transaction_hash": "0x62ddfe5b2375a2796097101f47d536114d4aa5d835a6b21200572b92e00f8c27",
+    "log_index": 3,
+    "recipient": "0x0d2643aeb398e381612c4052c7834e307894953f",
+    "amount_raw": "1625000000000000000000",
+    "amount_arb": "1625"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:34Z",
+    "transaction_hash": "0x85b65b8375d39c7c5bc0dddfa6f953dcb6de14ede9cff830406045184ff12a7a",
+    "log_index": 6,
+    "recipient": "0x1fd6eed3a005a5fbceef516ed17c797f6760c325",
+    "amount_raw": "1750000000000000000000",
+    "amount_arb": "1750"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:34Z",
+    "transaction_hash": "0xc1c0b198a0fbd2d97579eff45c4ae16e0aca3bccf3e67545b3d2e942f80e54da",
+    "log_index": 0,
+    "recipient": "0x87cd88c7598b978116f20d62a12f725a84086b8c",
+    "amount_raw": "875000000000000000000",
+    "amount_arb": "875"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:35Z",
+    "transaction_hash": "0x70413117d83c20cc137a140c02f05107da437d5c6c7be8088493f99fc0cee798",
+    "log_index": 0,
+    "recipient": "0xfccc8c600aab184b1513d2ff3654f36c7586d0c9",
+    "amount_raw": "1125000000000000000000",
+    "amount_arb": "1125"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:35Z",
+    "transaction_hash": "0x77b9697e5db4b432ef26775356dbb65fdd13ba609fe8f15501cd9eb1d0928697",
+    "log_index": 0,
+    "recipient": "0xe0a48a921b65cfb211727ee58060f19fc5e43642",
+    "amount_raw": "2125000000000000000000",
+    "amount_arb": "2125"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:36Z",
+    "transaction_hash": "0x06a7410432ecd75caf5ec903ffbf1e761ff7e41298c2e583d9f925a561caef02",
+    "log_index": 3,
+    "recipient": "0x76abf7ddb66888a32d938b47eef4d6a9db850a13",
+    "amount_raw": "875000000000000000000",
+    "amount_arb": "875"
+  },
+  {
+    "block_timestamp": "2023-03-23T13:01:36Z",
+    "transaction_hash": "0x88e59fbf4ca94d1189ad209e123a66ee0810989a3061590dbd3951dd94f3792c",
+    "log_index": 0,
+    "recipient": "0xdae4a6448e8009a703e9584b2c45c3ebe3db2d32",
+    "amount_raw": "4000000000000000000000",
+    "amount_arb": "4000"
+  }
+]

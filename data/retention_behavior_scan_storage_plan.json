@@ -1,0 +1,256 @@
+{
+  "generated_at": "2026-08-22",
+  "status": "scan_storage_plan_behavior_chunks_01_02_compacted_cleanup_complete_chunk_03_not_started",
+  "protected_validated_inputs": {
+    "claim_recipients": 583137,
+    "claimed_arb": "1092811500",
+    "early_outflow_profile": "data/full_early_outflow_metrics.json",
+    "post_claim_activity_profile": "data/post_claim_activity_full_cohort_profile.json",
+    "policy": "Reuse completed 24h and 7d results unless a documented QA failure proves reuse unsafe."
+  },
+  "source_metadata_checked_at": "2026-08-22",
+  "arbitrum_public_tables": [
+    "blocks",
+    "decoded_events",
+    "logs",
+    "receipts",
+    "transactions"
+  ],
+  "historical_token_balance_table_available": false,
+  "current_working_storage": {
+    "table_count": 90,
+    "active_logical_bytes_estimate_min": 3833850197,
+    "active_logical_bytes_estimate_max": 3833850197,
+    "active_logical_gib_estimate_max": 3.5705512362,
+    "headroom_to_active_storage_target_bytes": 4756084395,
+    "headroom_to_active_storage_target_gib": 4.4294487638,
+    "transfer_source_active_logical_bytes": 819442976,
+    "transfer_source_table_count": 29,
+    "enriched_claim_table_count": 25,
+    "claim_order_table_count": 4,
+    "signed_leg_active_logical_bytes": 1000397469,
+    "balance_proxy_active_logical_bytes": 351252863,
+    "behavior_source_chunk_01_active_logical_bytes": 0,
+    "behavior_source_chunk_01_removed_after_validated_compaction_bytes": 1758150778,
+    "behavior_target_function_partial_chunk_01_active_logical_bytes": 263954903,
+    "behavior_claimant_partial_chunk_01_active_logical_bytes": 46770240,
+    "behavior_compact_chunk_01_active_logical_bytes": 310725143,
+    "behavior_source_chunk_02_active_logical_bytes": 0,
+    "behavior_source_chunk_02_removed_after_validated_compaction_bytes": 1407291692,
+    "behavior_target_function_partial_chunk_02_active_logical_bytes": 271991494,
+    "behavior_claimant_partial_chunk_02_active_logical_bytes": 58272991,
+    "behavior_compact_chunk_02_active_logical_bytes": 330264485,
+    "earliest_expiration_utc": "2026-09-14T08:53:15.096Z",
+    "latest_expiration_utc": "2026-09-21T00:35:07.559Z",
+    "source": "Exact BigQuery metadata API inventory of all 90 YOUR_DATASET_ID tables after chunk-02 cleanup; no SQL or blockchain-table scan.",
+    "estimate_note": "The full metadata inventory resolved the prior one-table count discrepancy and the earlier byte-estimate range. The recorded minimum and maximum are now equal to the exact active logical byte total.",
+    "information_schema_table_storage_access": "denied under current Sandbox credentials; the failed metadata dry run scanned no data"
+  },
+  "reusable_claim_order": {
+    "table_pattern": "YOUR_DATASET_ID.post_claim_transaction_order_batch_*",
+    "table_count": 4,
+    "validated_unique_claim_transactions": 583131,
+    "validated_claim_events_covered": 583137,
+    "missing_claim_order_keys": 0,
+    "metadata_mismatch_rows": 0,
+    "required_order_fields": [
+      "claim_receipt_block_number",
+      "claim_transaction_index",
+      "claim_transaction_hash"
+    ],
+    "reuse_policy": "Reuse the completed compact order layer; do not re-scan removed transaction-source chunks without a demonstrated defect."
+  },
+  "guardrails": {
+    "hard_per_query_bytes": 10737418240,
+    "planning_target_bytes": 8589934592,
+    "active_storage_target_bytes": 8589934592,
+    "fresh_dry_run_required": true,
+    "change_billing": false,
+    "execute_above_hard_limit": false
+  },
+  "coverage": {
+    "claim_window_observed": {
+      "first_claim": "2023-03-23T13:01:22Z",
+      "last_claim": "2023-09-24T20:12:52Z"
+    },
+    "transaction_source": {
+      "start": "2023-02-21T00:00:00Z",
+      "end": "2023-10-25T00:00:00Z",
+      "reason": "Covers 30 elapsed days before the earliest claim and after the latest claim."
+    },
+    "arb_transfer_source": {
+      "provisional_start": "2023-03-16T00:00:00Z",
+      "validated_first_transfer": "2023-03-16T12:08:28Z",
+      "end": "2023-10-25T00:00:00Z",
+      "start_validation_required": false,
+      "reason": "SQL 79 reconciled the first mint to its raw log, and Arbiscan independently reports ARB contract creation and the mint in the same successful transaction."
+    }
+  },
+  "chunk_schedule": {
+    "semantics": "Non-overlapping half-open UTC intervals; every exact new statement receives a fresh dry run.",
+    "transaction_chunk_count": 34,
+    "arb_transfer_chunk_count": 29,
+    "shared_middle_plan": "data/post_claim_transaction_source_scan_plan.json",
+    "transaction_prefix": [
+      {
+        "start": "2023-02-21",
+        "end": "2023-02-25"
+      },
+      {
+        "start": "2023-02-25",
+        "end": "2023-03-01"
+      },
+      {
+        "start": "2023-03-01",
+        "end": "2023-03-04"
+      },
+      {
+        "start": "2023-03-04",
+        "end": "2023-03-08"
+      },
+      {
+        "start": "2023-03-08",
+        "end": "2023-03-16"
+      },
+      {
+        "start": "2023-03-16",
+        "end": "2023-03-23"
+      }
+    ],
+    "arb_transfer_prefix": [
+      {
+        "start": "2023-03-16",
+        "end": "2023-03-23"
+      }
+    ],
+    "shared_middle": {
+      "start": "2023-03-23",
+      "end": "2023-10-02",
+      "chunk_count": 24
+    },
+    "shared_suffix": [
+      {
+        "start": "2023-10-02",
+        "end": "2023-10-09"
+      },
+      {
+        "start": "2023-10-09",
+        "end": "2023-10-16"
+      },
+      {
+        "start": "2023-10-16",
+        "end": "2023-10-23"
+      },
+      {
+        "start": "2023-10-23",
+        "end": "2023-10-25"
+      }
+    ],
+    "old_byte_estimates_reusable": false,
+    "canonical_schedule": "data/symmetric_behavior_chunk_schedule.json",
+    "count_correction_note": "The protected prefix is two validated chunks. The storage-blocked [2023-03-01, 2023-03-08) attempt was split into [2023-03-01, 2023-03-04) and [2023-03-04, 2023-03-08). The canonical schedule is 6 prefix chunks, 24 shared-middle chunks, and 4 suffix chunks: 34 total.",
+    "storage_projection_blocked_archive": "data/symmetric_behavior_pipeline/storage_projection_blocked/chunk_03_2026-08-22_full_interval/manifest.json"
+  },
+  "retention_definition": {
+    "initial_public_name": "transfer-derived ARB balance proxy",
+    "exact_event_order": [
+      "block_number",
+      "transaction_index",
+      "log_index"
+    ],
+    "pre_claim_balance_excludes_claim_transfer": true,
+    "cutoff_semantics": "Include qualifying ARB transfer legs strictly before claim timestamp plus 7 or 30 elapsed days.",
+    "total_balance_to_claim_buckets": [
+      "0%",
+      "(0%, 25%)",
+      "[25%, 75%)",
+      "[75%, 100%]",
+      ">100%"
+    ],
+    "pre_claim_adjusted_retained_claim_is_proxy": true,
+    "promotion_requires_independent_historical_balance_checkpoint": true
+  },
+  "activity_definition": {
+    "pre_window": "[claim timestamp - 30 days, exact claim order)",
+    "post_window": "strictly after exact claim transaction order and before claim timestamp + 30 days",
+    "claim_transaction_excluded": true,
+    "previously_inactive": "zero successful claimant-initiated top-level transactions in the pre window",
+    "previously_active": "one or more successful claimant-initiated top-level transactions in the pre window",
+    "calendar_time_control": [
+      "claim_week",
+      "claim_month",
+      "within-claim-week paired differences"
+    ]
+  },
+  "protocol_categories": [
+    "DEX",
+    "bridge",
+    "lending",
+    "NFT/gaming",
+    "governance",
+    "transfer-only",
+    "other",
+    "unknown"
+  ],
+  "protocol_label_policy": {
+    "target_verified_coverage": "90-95% of qualifying transaction rows",
+    "force_target": false,
+    "unknown_is_allowed": true,
+    "required_fields": [
+      "address",
+      "category",
+      "protocol_name",
+      "chain",
+      "evidence_url",
+      "evidence_type",
+      "access_date"
+    ]
+  },
+  "joint_groups": [
+    "outflow only",
+    "non-outflow protocol activity only",
+    "both",
+    "neither"
+  ],
+  "robust_statistics": {
+    "required": [
+      "median",
+      "P75",
+      "P90",
+      "high-frequency recipient share",
+      "high-frequency transaction-row share"
+    ],
+    "high_frequency_threshold": "Observed P90 transaction count for the relevant window and segment; retain ties.",
+    "claim_size_language": "descriptive_only"
+  },
+  "storage_lifecycle": [
+    "materialize one bounded source chunk",
+    "run source-grain QA and bounded reconciliation",
+    "compact to claim-grain partials and target/function counts",
+    "save exact SQL, fresh dry-run bytes and QA in progress JSON",
+    "remove only recoverable large staging after compact outputs and recovery evidence are verified"
+  ],
+  "qa_gates": [
+    "grain",
+    "duplicates",
+    "critical NULLs",
+    "join cardinality",
+    "intentional row multiplication",
+    "event ordering",
+    "half-open windows",
+    "cross-chunk coverage",
+    "source-to-partial reconciliation",
+    "partial-to-final reconciliation",
+    "deterministic wallet sample",
+    "bounded raw-source validation",
+    "independent comparison where available"
+  ],
+  "reserved_sql_ranges": {
+    "77_82": "ARB transfer source, source QA and compact balance partials",
+    "83_86": "retention assembly, distributions, samples and reconciliation",
+    "87_91": "symmetric 30-day activity source and calendar-cohort QA",
+    "92_95": "target discovery, verified labels and classification",
+    "96_99": "joint groups, robust statistics, chart export and final QA"
+  },
+  "next_step": "Chunks 01 and 02 remain complete and protected. The historical [2023-03-01, 2023-03-08) chunk-03 attempt is storage-projection-blocked and archived. The new canonical chunk 03 is [2023-03-01, 2023-03-04); its immutable SQL is locally validated but has not received a fresh dry run. A future dry run requires separate authorization, and Execute remains prohibited until every mandatory gate passes."
+}

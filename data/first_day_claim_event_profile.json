@@ -1,0 +1,20 @@
+[
+  {
+    "claim_event_rows": "422480",
+    "distinct_claim_transactions": "422480",
+    "distinct_recipients": "422480",
+    "duplicated_event_keys": "0",
+    "extra_rows_above_event_grain": "0",
+    "recipients_with_multiple_claim_events": "0",
+    "extra_event_rows_above_one_per_recipient": "0",
+    "null_transaction_hash_rows": "0",
+    "null_log_index_rows": "0",
+    "null_block_timestamp_rows": "0",
+    "invalid_or_null_recipient_rows": "0",
+    "invalid_or_null_amount_rows": "0",
+    "first_claim_timestamp": "2023-03-23 13:01:22.000000 UTC",
+    "last_claim_timestamp": "2023-03-23 23:59:59.000000 UTC",
+    "total_claimed_raw": "802591375000000000000000000",
+    "total_claimed_arb": "802591375"
+  }
+]

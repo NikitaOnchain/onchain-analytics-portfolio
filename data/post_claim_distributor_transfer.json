@@ -1,0 +1,32 @@
+{
+  "query": "sql/12_isolate_post_claim_distributor_transfers.sql",
+  "execution_date": "2026-08-13",
+  "dry_run_upper_bound_bytes": "2201791932",
+  "raw_claim_last_timestamp": "2023-09-24 20:12:52.000000 UTC",
+  "returned_row_count": "1",
+  "block_number": "134320927",
+  "block_timestamp": "2023-09-25 02:20:03.000000 UTC",
+  "transaction_hash": "0xa2477f2f1d7824501520a88b50835ad283e7472e0fa5e67005452528bf740175",
+  "log_index": "0",
+  "sender": "0x67a24ce4321ab3af51c2d0a4801c3e111d88c9d9",
+  "recipient": "0xf3fc178157fb3c87548baa86f9d24ba38e649b58",
+  "amount_raw": "69448385458006064728014866",
+  "amount_arb": "69448385.458006064728014866",
+  "matches_full_window_event_difference": true,
+  "matches_full_window_amount_difference": true,
+  "classification_status": "verified",
+  "classification": "unclaimed_token_sweep_to_configured_sweep_receiver",
+  "classification_confidence": "high",
+  "explorer_recipient_label": "Arbitrum Foundation: DAO Treasury",
+  "transaction_function": "sweep()",
+  "contract_event": "Swept(uint256)",
+  "contract_destroyed_after_sweep": true,
+  "is_claim": false,
+  "is_sale": false,
+  "recommended_transfer_cohort_exclusion": "Exclude this verified sweep transaction by transaction_hash.",
+  "manual_verification_date": "2026-08-13",
+  "sources": [
+    "https://arbiscan.io/tx/0xa2477f2f1d7824501520a88b50835ad283e7472e0fa5e67005452528bf740175",
+    "https://github.com/ArbitrumFoundation/governance/blob/main/src/TokenDistributor.sol"
+  ]
+}

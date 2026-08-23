@@ -1,0 +1,146 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-23",
+  "status": "validated_chart_input",
+  "scope": "Transfer-derived ARB balance proxies at 7 and 30 elapsed days after each exact claim.",
+  "grain": {
+    "balance_to_claim_bucket_distribution": "one row per cutoff and ordered total-balance-to-claim bucket",
+    "adjusted_retained_claim_proxy": "one row per cutoff"
+  },
+  "cohort": {
+    "claim_recipients": 583137,
+    "claimed_arb": "1092811500",
+    "claim_period": "2023-03-23 through 2023-09-24"
+  },
+  "source_evidence": [
+    {
+      "path": "data/retention_transfer_derived_arb_balance_proxy_profile.json",
+      "sha256": "5512bfe245f288375dc35228132522978b4be637554ead46ad4a29d3f8c3d453"
+    }
+  ],
+  "metric_definitions": {
+    "total_balance_to_claim_bucket": "Transfer-derived total ARB balance at the cutoff divided by the validated claim amount.",
+    "adjusted_retained_claim_proxy": "Transfer-derived total ARB balance at the cutoff minus positive pre-claim ARB balance, capped to the interval from zero to the validated claim amount, then aggregated across recipients.",
+    "window_boundary": "Each cutoff is measured immediately before claim_timestamp plus the stated number of elapsed 24-hour periods. Exact claim-event ordering uses block_number, transaction_index, and log_index."
+  },
+  "bucket_order": [
+    "0%",
+    "<25%",
+    "25-75%",
+    "75-100%",
+    ">100%"
+  ],
+  "balance_to_claim_bucket_distribution": [
+    {
+      "cutoff_order": 1,
+      "cutoff_days": 7,
+      "cutoff_label": "7 days after claim",
+      "bucket_order": 1,
+      "balance_to_claim_bucket": "0%",
+      "recipient_count": 365994,
+      "recipient_share": 0.6276295278810983
+    },
+    {
+      "cutoff_order": 1,
+      "cutoff_days": 7,
+      "cutoff_label": "7 days after claim",
+      "bucket_order": 2,
+      "balance_to_claim_bucket": "<25%",
+      "recipient_count": 97883,
+      "recipient_share": 0.1678559240795902
+    },
+    {
+      "cutoff_order": 1,
+      "cutoff_days": 7,
+      "cutoff_label": "7 days after claim",
+      "bucket_order": 3,
+      "balance_to_claim_bucket": "25-75%",
+      "recipient_count": 20104,
+      "recipient_share": 0.034475603503121906
+    },
+    {
+      "cutoff_order": 1,
+      "cutoff_days": 7,
+      "cutoff_label": "7 days after claim",
+      "bucket_order": 4,
+      "balance_to_claim_bucket": "75-100%",
+      "recipient_count": 88386,
+      "recipient_share": 0.15156987123094573
+    },
+    {
+      "cutoff_order": 1,
+      "cutoff_days": 7,
+      "cutoff_label": "7 days after claim",
+      "bucket_order": 5,
+      "balance_to_claim_bucket": ">100%",
+      "recipient_count": 10770,
+      "recipient_share": 0.018469073305243878
+    },
+    {
+      "cutoff_order": 2,
+      "cutoff_days": 30,
+      "cutoff_label": "30 days after claim",
+      "bucket_order": 1,
+      "balance_to_claim_bucket": "0%",
+      "recipient_count": 375348,
+      "recipient_share": 0.643670355336739
+    },
+    {
+      "cutoff_order": 2,
+      "cutoff_days": 30,
+      "cutoff_label": "30 days after claim",
+      "bucket_order": 2,
+      "balance_to_claim_bucket": "<25%",
+      "recipient_count": 127912,
+      "recipient_share": 0.2193515417474796
+    },
+    {
+      "cutoff_order": 2,
+      "cutoff_days": 30,
+      "cutoff_label": "30 days after claim",
+      "bucket_order": 3,
+      "balance_to_claim_bucket": "25-75%",
+      "recipient_count": 17726,
+      "recipient_share": 0.03039765955513027
+    },
+    {
+      "cutoff_order": 2,
+      "cutoff_days": 30,
+      "cutoff_label": "30 days after claim",
+      "bucket_order": 4,
+      "balance_to_claim_bucket": "75-100%",
+      "recipient_count": 53530,
+      "recipient_share": 0.09179661040201531
+    },
+    {
+      "cutoff_order": 2,
+      "cutoff_days": 30,
+      "cutoff_label": "30 days after claim",
+      "bucket_order": 5,
+      "balance_to_claim_bucket": ">100%",
+      "recipient_count": 8621,
+      "recipient_share": 0.014783832958635792
+    }
+  ],
+  "adjusted_retained_claim_proxy": [
+    {
+      "cutoff_order": 1,
+      "cutoff_days": 7,
+      "cutoff_label": "7 days after claim",
+      "adjusted_retained_claim_proxy_arb": "237175758.696271745934551294",
+      "adjusted_retained_claim_proxy_share": 0.217032634353017
+    },
+    {
+      "cutoff_order": 2,
+      "cutoff_days": 30,
+      "cutoff_label": "30 days after claim",
+      "adjusted_retained_claim_proxy_arb": "155285553.141825927991675801",
+      "adjusted_retained_claim_proxy_share": 0.142097290467593
+    }
+  ],
+  "context": {
+    "recipients_with_positive_pre_claim_arb_balance": 4710,
+    "positive_pre_claim_balance_recipient_share": 0.00807700420312894
+  },
+  "interpretation_guardrail": "These measures are transfer-derived ARB balance proxies. They do not trace fungible claimed units and are not address activity, protocol engagement, human retention, or proof of sale. A total balance above 100% of the claim can reflect additional post-claim ARB inflow."
+}

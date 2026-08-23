@@ -1,0 +1,118 @@
+{
+  "generated_at": "2026-08-22",
+  "status": "passed",
+  "query": "../sql/86_sample_arb_claimant_transfer_legs.sql",
+  "query_sha256": "38c0ebd52c9e16164cd80296d0e89cab2d6aeaaf369ab9c49146c7a5e97036f3",
+  "grain": "one row per deterministically selected claim recipient",
+  "selection_rule": "Choose one hashed pre-claim-leg wallet, one hashed self-transfer wallet, the highest-leg-count wallet, and then hash-ordered wallets; deduplicate by recipient and retain five addresses.",
+  "bounded_arrays": {
+    "latest_pre_claim_legs": 5,
+    "exact_claim_event_legs": 2,
+    "earliest_post_claim_legs_7d": 5
+  },
+  "query_execution": {
+    "first_correlated_dry_run_attempt": {
+      "executed": false,
+      "reason": "BigQuery could not de-correlate the bounded array subqueries; the final assembly was rewritten as one selected-wallet JOIN with conditional ARRAY_AGG."
+    },
+    "fresh_successful_dry_run_bytes": 1085466249,
+    "dry_run_accuracy": "UPPER_BOUND",
+    "planning_target_bytes": 8589934592,
+    "hard_limit_bytes": 10737418240,
+    "executed": true,
+    "job_id": "REDACTED_JOB_ID",
+    "total_bytes_processed": 1085466249,
+    "total_bytes_billed": 1086324736,
+    "total_slot_ms": 81642,
+    "cache_hit": false,
+    "billing_changed": false
+  },
+  "sample_summary": {
+    "wallet_rows": 5,
+    "distinct_wallets": 5,
+    "selection_categories": [
+      "pre_claim_legs",
+      "self_transfer",
+      "highest_leg_count",
+      "hash_sample",
+      "hash_sample"
+    ],
+    "all_exact_claim_event_arrays_have_one_destination_leg": true,
+    "all_exact_claim_leg_amounts_match_claim_amount": true,
+    "all_exact_claim_block_transaction_log_keys_match": true,
+    "all_sample_self_transfer_net_amounts_zero": true
+  },
+  "wallets": [
+    {
+      "selection_category": "pre_claim_legs",
+      "claim_recipient": "0x2c99288cafc2a2469b8ccad3bf817af3d13179de",
+      "claim_timestamp": "2023-03-24 08:27:08",
+      "claim_block_number": 73118944,
+      "claim_transaction_index": 4,
+      "claim_log_index": 1,
+      "claim_amount_raw": "625000000000000000000",
+      "leg_rows": 12,
+      "pre_claim_leg_rows": 1,
+      "self_transfer_leg_rows": 0,
+      "self_transfer_net_signed_amount_raw": "0",
+      "manual_check": "The latest pre-claim leg is an inbound leg in block 72972868, strictly before the claim. The exact claim event is one destination leg from the validated distributor with matching amount and order key."
+    },
+    {
+      "selection_category": "self_transfer",
+      "claim_recipient": "0x229380389608cb019be4925ef0e5254c754dcce1",
+      "claim_timestamp": "2023-03-23 14:50:02",
+      "claim_block_number": 72855250,
+      "claim_transaction_index": 17,
+      "claim_log_index": 37,
+      "claim_amount_raw": "1750000000000000000000",
+      "leg_rows": 85,
+      "pre_claim_leg_rows": 0,
+      "self_transfer_leg_rows": 2,
+      "self_transfer_net_signed_amount_raw": "0",
+      "manual_check": "The wallet has the expected two self-transfer legs and exact zero net signed amount. Its claim destination leg matches claim metadata."
+    },
+    {
+      "selection_category": "highest_leg_count",
+      "claim_recipient": "0x6f15ee9258acdebf356db7ab607bb255a00c6fdf",
+      "claim_timestamp": "2023-03-25 02:23:36",
+      "claim_block_number": 73380443,
+      "claim_transaction_index": 3,
+      "claim_log_index": 7,
+      "claim_amount_raw": "3125000000000000000000",
+      "leg_rows": 34070,
+      "pre_claim_leg_rows": 0,
+      "self_transfer_leg_rows": 0,
+      "self_transfer_net_signed_amount_raw": "0",
+      "manual_check": "The bounded arrays remain capped despite the long event history. The exact claim leg matches and the first post-claim sender leg is later by block number."
+    },
+    {
+      "selection_category": "hash_sample",
+      "claim_recipient": "0x06fb957b5018b33c59784be4fdcbe7b77ec38b90",
+      "claim_timestamp": "2023-03-23 14:42:16",
+      "claim_block_number": 72853285,
+      "claim_transaction_index": 12,
+      "claim_log_index": 16,
+      "claim_amount_raw": "1625000000000000000000",
+      "leg_rows": 2,
+      "pre_claim_leg_rows": 0,
+      "self_transfer_leg_rows": 0,
+      "self_transfer_net_signed_amount_raw": "0",
+      "manual_check": "The outgoing leg occurs in the same block timestamp but transaction index 13, after claim transaction index 12, confirming block-aware event ordering."
+    },
+    {
+      "selection_category": "hash_sample",
+      "claim_recipient": "0x44da7dcd75b9e628865ce607a7474f095e6a8d09",
+      "claim_timestamp": "2023-03-23 17:24:00",
+      "claim_block_number": 72896535,
+      "claim_transaction_index": 3,
+      "claim_log_index": 5,
+      "claim_amount_raw": "6250000000000000000000",
+      "leg_rows": 21,
+      "pre_claim_leg_rows": 0,
+      "self_transfer_leg_rows": 0,
+      "self_transfer_net_signed_amount_raw": "0",
+      "manual_check": "The exact claim destination leg matches. The first bounded post-claim sender leg occurs in a later block and is not labeled as a sale."
+    }
+  ],
+  "interpretation": "The deterministic sample validates signed direction, exact claim placement, bounded ordering, and self-transfer netting. Outgoing legs are ARB transfers and are not classified as sales."
+}

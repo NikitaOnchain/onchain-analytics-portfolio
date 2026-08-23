@@ -1,0 +1,49 @@
+{
+  "checkpoint_date": "2026-08-20",
+  "status": "validated_source_chunk",
+  "source_sql": "../sql/78_materialize_claimant_arb_balance_transfer_source_chunk.sql",
+  "profile_sql": "../sql/80_profile_claimant_arb_balance_transfer_source_chunk_01.sql",
+  "target_table": "YOUR_DATASET_ID.retention_arb_transfer_source_chunk_01",
+  "intended_grain": ["transaction_hash", "log_index"],
+  "interval_utc": "[2023-03-16, 2023-03-23)",
+  "execution": {
+    "source_ctas_fresh_dry_run_bytes": 6697991518,
+    "source_ctas_executed": true,
+    "profile_fresh_dry_run_bytes": 25661804,
+    "profile_executed": true,
+    "maximum_bytes_billed": 10737418240,
+    "billing_changed": false
+  },
+  "profile": {
+    "source_rows": 16,
+    "distinct_event_keys": 16,
+    "rows_on_duplicate_event_keys": 0,
+    "extra_rows_above_unique_event_grain": 0,
+    "critical_null_rows": 0,
+    "invalid_source_chunk_number_rows": 0,
+    "out_of_window_rows": 0,
+    "invalid_address_rows": 0,
+    "non_positive_amount_rows": 0,
+    "invalid_source_match_rows": 0,
+    "non_claimant_related_rows": 0,
+    "self_transfer_rows": 0,
+    "claimant_sender_event_rows": 13,
+    "claimant_destination_event_rows": 3,
+    "first_transfer_timestamp_utc": "2023-03-16 22:14:39",
+    "last_transfer_timestamp_utc": "2023-03-22 21:35:06",
+    "gross_event_amount_raw": "191797960000000000000",
+    "gross_event_amount_arb": "191.79796"
+  },
+  "quality_assessment": {
+    "grain": "pass",
+    "completeness": "pass",
+    "validity": "pass",
+    "bounded_timeliness": "pass",
+    "cohort_relevance": "pass",
+    "source_cardinality": "pass_from_persisted_match_count",
+    "independent_source_reconciliation": "pass",
+    "deterministic_wallet_sample": "pass",
+    "analysis_ready": true
+  },
+  "next_step": "Scale the validated source pattern through bounded non-overlapping chunks with fresh dry runs and per-chunk structural profiles; retention metrics remain pending full source coverage and balance reconstruction QA."
+}

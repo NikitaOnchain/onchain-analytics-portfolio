@@ -1,0 +1,29 @@
+{
+  "generated_at": "2026-08-15",
+  "source_query": "sql/51_qa_early_outflow_chart_data.sql",
+  "dry_run_bytes": 69299432,
+  "claim_rows": 583137,
+  "segment_count": 4,
+  "timing_bucket_count": 6,
+  "segment_recipient_count": 583137,
+  "timing_recipient_count": 583137,
+  "invalid_segment_rows": 0,
+  "invalid_timing_bucket_rows": 0,
+  "segment_claimed_raw": "1092811500000000000000000000",
+  "source_claimed_raw": "1092811500000000000000000000",
+  "segment_claim_linked_outflow_raw_24h": "798229705906067898468974092",
+  "source_claim_linked_outflow_raw_24h": "798229705906067898468974092",
+  "segment_claim_linked_outflow_raw_7d": "878245366362363087116052122",
+  "source_claim_linked_outflow_raw_7d": "878245366362363087116052122",
+  "checks": {
+    "expected_segment_count": true,
+    "expected_timing_bucket_count": true,
+    "segment_recipient_count_match": true,
+    "timing_recipient_count_match": true,
+    "segment_claimed_amount_match": true,
+    "segment_claim_linked_outflow_24h_match": true,
+    "segment_claim_linked_outflow_7d_match": true,
+    "segment_domain_checks_pass": true,
+    "timing_domain_checks_pass": true
+  }
+}

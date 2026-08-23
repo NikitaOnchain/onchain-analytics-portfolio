@@ -1,0 +1,19 @@
+[
+  {
+    "comparison_key": [
+      "transaction_hash",
+      "recipient",
+      "amount_raw"
+    ],
+    "raw_claim_rows": "422480",
+    "distinct_raw_tuples": "422480",
+    "decoded_transfer_rows": "422480",
+    "distinct_decoded_transfer_tuples": "422480",
+    "raw_only_tuples": "0",
+    "transfer_only_tuples": "0",
+    "duplicate_raw_tuples": "0",
+    "duplicate_decoded_transfer_tuples": "0",
+    "exact_set_match": true,
+    "validated_scope": "2023-03-23 UTC"
+  }
+]

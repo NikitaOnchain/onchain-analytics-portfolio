@@ -1,0 +1,1303 @@
+{
+  "surface": "report",
+  "manifest": {
+    "version": 1,
+    "surface": "report",
+    "title": "ARB Airdrop: Early Outflow, Address Activity and Transfer-Derived Balance Proxies",
+    "description": "A reproducible technical analysis of ARB early outflow, address activity, and transfer-derived balance proxies through 30 days after claim.",
+    "generatedAt": "2026-08-23",
+    "filters": [],
+    "cards": [
+      {
+        "id": "card_recipients",
+        "description": "Unique validated recipients in the complete claim cohort.",
+        "dataset": "headline_cohort",
+        "sourceId": "src_claim_cohort",
+        "metrics": [
+          {
+            "label": "Claim recipients",
+            "field": "recipients",
+            "format": "compact"
+          }
+        ]
+      },
+      {
+        "id": "card_claimed_arb",
+        "description": "Total ARB claimed across the validated cohort.",
+        "dataset": "headline_cohort",
+        "sourceId": "src_claim_cohort",
+        "metrics": [
+          {
+            "label": "Claimed ARB",
+            "field": "claimed_arb",
+            "format": "compact"
+          }
+        ]
+      },
+      {
+        "id": "card_positive_outflow",
+        "description": "Recipients with at least one positive non-self ARB outflow.",
+        "dataset": "headline_early",
+        "sourceId": "src_early_outflow",
+        "metrics": [
+          {
+            "label": "Positive outflow within 7d",
+            "field": "positive_outflow_rate_7d",
+            "format": "percent"
+          },
+          {
+            "label": "Within 24h",
+            "field": "positive_outflow_rate_24h",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "card_claim_linked_proxy",
+        "description": "Capped claim-linked outflow as a share of claimed ARB.",
+        "dataset": "headline_early",
+        "sourceId": "src_early_outflow",
+        "metrics": [
+          {
+            "label": "Claim-linked outflow proxy within 7d",
+            "field": "claim_linked_outflow_share_7d",
+            "format": "percent"
+          },
+          {
+            "label": "Within 24h",
+            "field": "claim_linked_outflow_share_24h",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "card_active_recipients",
+        "description": "Recipients initiating at least one successful top-level Arbitrum transaction.",
+        "dataset": "headline_activity",
+        "sourceId": "src_post_claim_activity",
+        "metrics": [
+          {
+            "label": "Active recipients within 7d",
+            "field": "active_recipient_rate_7d",
+            "format": "percent"
+          },
+          {
+            "label": "Within 24h",
+            "field": "active_recipient_rate_24h",
+            "format": "percent"
+          }
+        ]
+      },
+      {
+        "id": "card_adjusted_balance_proxy",
+        "description": "Capped pre-claim-adjusted transfer-derived balance proxy as a share of claimed ARB.",
+        "dataset": "headline_balance",
+        "sourceId": "src_balance_proxy",
+        "metrics": [
+          {
+            "label": "Adjusted balance proxy within 30d",
+            "field": "adjusted_balance_proxy_share_30d",
+            "format": "percent"
+          },
+          {
+            "label": "Within 7d",
+            "field": "adjusted_balance_proxy_share_7d",
+            "format": "percent"
+          }
+        ]
+      }
+    ],
+    "charts": [
+      {
+        "id": "chart_early_timing",
+        "title": "First positive ARB outflow after claim",
+        "subtitle": "Share of 583,137 validated recipients; elapsed time from exact claim order",
+        "type": "horizontalBar",
+        "intent": "comparison",
+        "question": "How quickly did recipients first move ARB out of the claiming address?",
+        "rationale": "Ordered horizontal bars make the long timing labels and mutually exclusive recipient shares easy to compare.",
+        "comparisonContext": {
+          "denominator": "583,137 claim recipients",
+          "grain": "recipient",
+          "unit": "share"
+        },
+        "dataset": "early_timing",
+        "sourceId": "src_early_outflow",
+        "encodings": {
+          "x": {
+            "field": "timing_bucket",
+            "type": "ordinal",
+            "label": "Timing bucket"
+          },
+          "y": {
+            "field": "recipient_share",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "Share of recipients"
+          },
+          "tooltip": [
+            {
+              "field": "recipient_count",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Recipients"
+            },
+            {
+              "field": "recipient_share",
+              "type": "quantitative",
+              "format": "percent",
+              "label": "Share"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "sequential",
+          "name": "blue"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Elapsed timing bucket",
+        "yAxisTitle": "Share of recipients",
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 6
+      },
+      {
+        "id": "chart_early_composition",
+        "title": "Claim-linked outflow and retained-claim proxy",
+        "subtitle": "Capped composition of claimed ARB after 24 hours and seven days",
+        "type": "horizontalStackedBar100",
+        "intent": "composition",
+        "question": "What share of claimed ARB is represented by the capped outflow and retained-claim proxies?",
+        "rationale": "A normalized stacked bar keeps the common claimed-ARB denominator explicit across both elapsed windows.",
+        "comparisonContext": {
+          "denominator": "claimed ARB",
+          "grain": "elapsed window",
+          "normalization": "100%"
+        },
+        "dataset": "early_composition",
+        "sourceId": "src_early_outflow",
+        "encodings": {
+          "x": {
+            "field": "window_label",
+            "type": "ordinal",
+            "label": "Elapsed window"
+          },
+          "y": {
+            "field": "share",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "Share of claimed ARB"
+          },
+          "color": {
+            "field": "measure",
+            "type": "nominal",
+            "label": "Proxy measure"
+          },
+          "tooltip": [
+            {
+              "field": "share",
+              "type": "quantitative",
+              "format": "percent",
+              "label": "Share"
+            },
+            {
+              "field": "arb_amount",
+              "type": "quantitative",
+              "format": "compact",
+              "unit": "ARB",
+              "label": "ARB amount"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "legend": {
+          "position": "bottom",
+          "sort": "spec"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Elapsed window",
+        "yAxisTitle": "Share of claimed ARB",
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 4
+      },
+      {
+        "id": "chart_activity_timing",
+        "title": "First post-claim activity",
+        "subtitle": "Successful top-level Arbitrum transactions initiated by each recipient within seven days",
+        "type": "horizontalBar",
+        "intent": "comparison",
+        "question": "How quickly did claim recipients first initiate another successful Arbitrum transaction?",
+        "rationale": "Ordered horizontal bars compare mutually exclusive timing buckets without implying a continuous time series.",
+        "comparisonContext": {
+          "denominator": "583,137 claim recipients",
+          "grain": "recipient",
+          "unit": "share"
+        },
+        "dataset": "activity_timing",
+        "sourceId": "src_post_claim_activity",
+        "encodings": {
+          "x": {
+            "field": "timing_bucket",
+            "type": "ordinal",
+            "label": "Timing bucket"
+          },
+          "y": {
+            "field": "recipient_share",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "Share of recipients"
+          },
+          "tooltip": [
+            {
+              "field": "recipient_count",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Recipients"
+            },
+            {
+              "field": "recipient_share",
+              "type": "quantitative",
+              "format": "percent",
+              "label": "Share"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "sequential",
+          "name": "blue"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Elapsed timing bucket",
+        "yAxisTitle": "Share of recipients",
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 6
+      },
+      {
+        "id": "chart_activity_segment_rates",
+        "title": "Active-recipient rate by claim-size segment",
+        "subtitle": "Four observed claim-size groups; 24-hour and seven-day elapsed windows",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "Did basic post-claim participation differ materially by claim size?",
+        "rationale": "Grouped bars show the two window rates on a common percentage scale for each claim-size segment.",
+        "comparisonContext": {
+          "denominator": "recipients within each claim-size segment",
+          "grain": "segment-window",
+          "unit": "share"
+        },
+        "dataset": "activity_segment_rates",
+        "sourceId": "src_post_claim_activity",
+        "encodings": {
+          "x": {
+            "field": "claim_size_segment",
+            "type": "ordinal",
+            "label": "Claim-size segment"
+          },
+          "y": {
+            "field": "active_recipient_rate",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "Active-recipient rate"
+          },
+          "color": {
+            "field": "window",
+            "type": "nominal",
+            "label": "Elapsed window"
+          },
+          "tooltip": [
+            {
+              "field": "active_recipients",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Active recipients"
+            },
+            {
+              "field": "recipient_count",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Segment recipients"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "legend": {
+          "position": "bottom",
+          "sort": "spec"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Claim-size segment",
+        "yAxisTitle": "Active-recipient rate",
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 8
+      },
+      {
+        "id": "chart_activity_segment_depth",
+        "title": "Seven-day transaction depth by claim-size segment",
+        "subtitle": "Average successful transactions per active recipient within seven elapsed days",
+        "type": "horizontalBar",
+        "intent": "comparison",
+        "question": "How did the depth of post-claim activity vary by claim size?",
+        "rationale": "Horizontal bars make the ordered segment labels readable and emphasize the monotonic increase in transaction depth.",
+        "comparisonContext": {
+          "denominator": "active recipients in each claim-size segment",
+          "grain": "segment",
+          "unit": "transactions per active recipient"
+        },
+        "dataset": "activity_segment_depth",
+        "sourceId": "src_post_claim_activity",
+        "encodings": {
+          "x": {
+            "field": "claim_size_segment",
+            "type": "ordinal",
+            "label": "Claim-size segment"
+          },
+          "y": {
+            "field": "average_transactions_per_active_recipient_7d",
+            "type": "quantitative",
+            "format": "number",
+            "label": "Average transactions per active recipient"
+          },
+          "tooltip": [
+            {
+              "field": "active_recipients_7d",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Active recipients"
+            },
+            {
+              "field": "average_active_utc_days_per_active_recipient_7d",
+              "type": "quantitative",
+              "format": "number",
+              "label": "Average active UTC days"
+            },
+            {
+              "field": "average_distinct_targets_per_active_recipient_7d",
+              "type": "quantitative",
+              "format": "number",
+              "label": "Average distinct targets"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "sequential",
+          "name": "gold"
+        },
+        "legend": {
+          "position": "bottom"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Claim-size segment",
+        "yAxisTitle": "Transactions per active recipient",
+        "valueFormat": "number",
+        "layout": "full",
+        "maxRows": 4
+      },
+      {
+        "id": "chart_activity_intensity",
+        "title": "Seven-day activity intensity",
+        "subtitle": "Recipient share compared with share of 3.87M qualifying successful transactions",
+        "type": "horizontalBar",
+        "intent": "comparison",
+        "question": "How concentrated were seven-day transaction rows among recipients with different activity intensity?",
+        "rationale": "Grouped horizontal bars compare population share with transaction-row share across long intensity labels.",
+        "comparisonContext": {
+          "denominator": "all recipients or all seven-day qualifying transactions",
+          "grain": "intensity bucket-measure",
+          "unit": "share"
+        },
+        "dataset": "activity_intensity",
+        "sourceId": "src_post_claim_activity",
+        "encodings": {
+          "x": {
+            "field": "transaction_count_bucket",
+            "type": "ordinal",
+            "label": "Seven-day transaction-count bucket"
+          },
+          "y": {
+            "field": "share",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "Share"
+          },
+          "color": {
+            "field": "measure",
+            "type": "nominal",
+            "label": "Measure"
+          },
+          "tooltip": [
+            {
+              "field": "recipient_count",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Recipients"
+            },
+            {
+              "field": "successful_transaction_rows",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Successful transactions"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "legend": {
+          "position": "bottom",
+          "sort": "spec"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Seven-day activity-intensity bucket",
+        "yAxisTitle": "Share",
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 10
+      },
+      {
+        "id": "chart_balance_distribution",
+        "title": "Transfer-derived total ARB balance relative to claim amount",
+        "subtitle": "Five exhaustive recipient buckets at seven-day and 30-day elapsed cutoffs",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "How were recipients distributed across total ARB balance-to-claim buckets at each cutoff?",
+        "rationale": "Grouped bars compare the same ordered, exhaustive balance buckets at the two discrete cutoffs.",
+        "comparisonContext": {
+          "denominator": "583,137 claim recipients per cutoff",
+          "grain": "cutoff-bucket",
+          "unit": "share"
+        },
+        "dataset": "balance_bucket_distribution",
+        "sourceId": "src_balance_proxy",
+        "encodings": {
+          "x": {
+            "field": "balance_to_claim_bucket",
+            "type": "ordinal",
+            "label": "Total balance relative to claim amount"
+          },
+          "y": {
+            "field": "recipient_share",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "Share of recipients"
+          },
+          "color": {
+            "field": "cutoff_label",
+            "type": "nominal",
+            "label": "Elapsed cutoff"
+          },
+          "tooltip": [
+            {
+              "field": "recipient_count",
+              "type": "quantitative",
+              "format": "compact",
+              "label": "Recipients"
+            },
+            {
+              "field": "recipient_share",
+              "type": "quantitative",
+              "format": "percent",
+              "label": "Share"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "categorical",
+          "name": "blue-gold"
+        },
+        "legend": {
+          "position": "bottom",
+          "sort": "spec"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Total balance relative to claim amount",
+        "yAxisTitle": "Share of recipients",
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 10
+      },
+      {
+        "id": "chart_balance_adjusted_proxy",
+        "title": "Pre-claim-adjusted ARB balance proxy",
+        "subtitle": "Capped share of claimed ARB at two discrete elapsed cutoffs",
+        "type": "bar",
+        "intent": "comparison",
+        "question": "What share of claimed ARB remained under the capped, pre-claim-adjusted transfer-derived proxy?",
+        "rationale": "Two zero-based bars compare discrete cutoffs without implying a continuous trend.",
+        "comparisonContext": {
+          "denominator": "1,092,811,500 claimed ARB",
+          "grain": "elapsed cutoff",
+          "unit": "share"
+        },
+        "dataset": "balance_adjusted_proxy",
+        "sourceId": "src_balance_proxy",
+        "encodings": {
+          "x": {
+            "field": "cutoff_label",
+            "type": "ordinal",
+            "label": "Elapsed cutoff"
+          },
+          "y": {
+            "field": "adjusted_retained_claim_proxy_share",
+            "type": "quantitative",
+            "format": "percent",
+            "label": "Share of claimed ARB"
+          },
+          "tooltip": [
+            {
+              "field": "adjusted_retained_claim_proxy_arb",
+              "type": "quantitative",
+              "format": "compact",
+              "unit": "ARB",
+              "label": "Adjusted proxy"
+            },
+            {
+              "field": "adjusted_retained_claim_proxy_share",
+              "type": "quantitative",
+              "format": "percent",
+              "label": "Share"
+            }
+          ]
+        },
+        "palette": {
+          "kind": "sequential",
+          "name": "blue"
+        },
+        "labels": {
+          "values": "auto"
+        },
+        "xAxisTitle": "Elapsed cutoff",
+        "yAxisTitle": "Share of claimed ARB",
+        "valueFormat": "percent",
+        "layout": "full",
+        "maxRows": 2
+      }
+    ],
+    "tables": [],
+    "sources": [
+      {
+        "id": "src_claim_cohort",
+        "label": "Validated ARB claim cohort profile",
+        "path": "sql/03_profile_claim_cohort.sql"
+      },
+      {
+        "id": "src_early_outflow",
+        "label": "Validated full-cohort early-outflow chart aggregates",
+        "path": "sql/50_export_early_outflow_chart_data.sql"
+      },
+      {
+        "id": "src_post_claim_activity",
+        "label": "Validated full-cohort post-claim activity chart aggregates",
+        "path": "sql/75_export_post_claim_activity_chart_data.sql"
+      },
+      {
+        "id": "src_balance_proxy",
+        "label": "Validated 7-day and 30-day transfer-derived ARB balance proxies",
+        "path": "data/retention_arb_balance_proxy_chart_data.json"
+      }
+    ],
+    "blocks": [
+      {
+        "id": "title",
+        "type": "markdown",
+        "body": "# ARB Airdrop: Early Outflow, Address Activity and Transfer-Derived Balance Proxies\n\nBy **Nikita Onchain** · [Source repository](https://github.com/NikitaOnchain/onchain-analytics-portfolio)"
+      },
+      {
+        "id": "technical_summary",
+        "type": "markdown",
+        "body": "## Technical summary\n\nFast ARB redistribution and broad address-level activity coexist in the validated claim cohort. Within seven elapsed days, 85.5% of recipients had positive early outflow and 90.9% initiated another successful Arbitrum transaction. Separately, 62.8% had a zero transfer-derived ARB balance at seven days, increasing to 64.4% at 30 days; the capped pre-claim-adjusted balance proxy declined from 21.7% to 14.2% of claimed ARB. These measures describe token movement, address activity, and transfer-derived balance separately. They do not establish sales, protocol engagement, human retention, or causal airdrop quality."
+      },
+      {
+        "id": "headline_metrics",
+        "type": "metric-strip",
+        "cardIds": [
+          "card_recipients",
+          "card_claimed_arb",
+          "card_positive_outflow",
+          "card_claim_linked_proxy",
+          "card_active_recipients",
+          "card_adjusted_balance_proxy"
+        ]
+      },
+      {
+        "id": "early_outflow_finding",
+        "type": "markdown",
+        "sourceId": "src_early_outflow",
+        "body": "## Most recipients moved ARB early, but the measure is not a sales estimate\n\nWithin 24 elapsed hours, **459,437 recipients (78.8%)** had at least one positive non-self ARB outflow; within seven days, the count reached **498,511 (85.5%)**. The first qualifying outflow occurred within one hour for **354,666 recipients (60.8%)**, while **84,626 (14.5%)** had no qualifying positive outflow in the first seven days.\n\nThe timing indicates rapid redistribution from claiming addresses. Destination and swap classification are not part of this baseline, so the result must be described as **early outflow**, not selling."
+      },
+      {
+        "id": "early_timing_chart",
+        "type": "chart",
+        "chartId": "chart_early_timing"
+      },
+      {
+        "id": "proxy_finding",
+        "type": "markdown",
+        "sourceId": "src_early_outflow",
+        "body": "## The capped claim-linked proxy reached 80.4% of claimed ARB within seven days\n\nCumulative positive outflow can exceed a claim because ARB is fungible and wallets may hold or receive ARB from other sources. To bound the claim-related signal, the analysis caps each recipient's cumulative positive outflow at that recipient's claim amount. The resulting claim-linked outflow proxy represented **73.0% of claimed ARB within 24 hours** and **80.4% within seven days**. The complementary retained-claim proxies were **27.0%** and **19.6%**.\n\nThis is a balance-style proxy, not token-unit tracing: it does not prove which ARB units moved or remained."
+      },
+      {
+        "id": "early_composition_chart",
+        "type": "chart",
+        "chartId": "chart_early_composition"
+      },
+      {
+        "id": "balance_distribution_finding",
+        "type": "markdown",
+        "sourceId": "src_balance_proxy",
+        "body": "## Zero transfer-derived balances became slightly more common by day 30\n\nAt the seven-day cutoff, **365,994 recipients (62.8%)** had a zero transfer-derived ARB balance; at 30 days, the count was **375,348 (64.4%)**. The **75–100%** bucket fell from **88,386 recipients (15.2%)** to **53,530 (9.2%)**.\n\nThe total-balance buckets include pre-claim holdings and later ARB inflows. The **greater-than-100%** bucket therefore does not imply retained airdrop units; it can reflect additional ARB received after claim."
+      },
+      {
+        "id": "balance_distribution_chart",
+        "type": "chart",
+        "chartId": "chart_balance_distribution"
+      },
+      {
+        "id": "balance_adjusted_finding",
+        "type": "markdown",
+        "sourceId": "src_balance_proxy",
+        "body": "## The adjusted balance proxy declined from 21.7% at seven days to 14.2% at 30 days\n\nThe capped pre-claim-adjusted proxy represented **237.176 million ARB (21.7% of claimed ARB)** at seven days and **155.286 million ARB (14.2%)** at 30 days. For the **4,710 recipients (0.8%)** with a positive transfer-derived balance before claim, that positive amount is removed before each recipient's proxy is capped between zero and the claim amount.\n\nThis adjustment reduces obvious pre-claim contamination but cannot trace fungible claimed units. It is a transfer-derived balance proxy, not exact token retention or evidence that the same human remained active."
+      },
+      {
+        "id": "balance_adjusted_chart",
+        "type": "chart",
+        "chartId": "chart_balance_adjusted_proxy"
+      },
+      {
+        "id": "activity_breadth_finding",
+        "type": "markdown",
+        "sourceId": "src_post_claim_activity",
+        "body": "## Address-level activity was broader than the early-outflow signal\n\nA recipient is active when the claiming address initiates at least one successful top-level Arbitrum transaction after exact claim order. By this definition, **482,559 recipients (82.8%)** were active within 24 hours and **530,248 (90.9%)** within seven days. First activity occurred within one hour for **378,291 recipients (64.9%)**; **52,889 (9.1%)** had no qualifying activity within seven days.\n\nThis measures transaction initiation by an address. It does not identify the human behind the address, the protocol used, token retention, or economic intent."
+      },
+      {
+        "id": "activity_timing_chart",
+        "type": "chart",
+        "chartId": "chart_activity_timing"
+      },
+      {
+        "id": "claim_size_finding",
+        "type": "markdown",
+        "sourceId": "src_post_claim_activity",
+        "body": "## Claim size was associated with activity depth more than participation breadth\n\nSeven-day active-recipient rates were tightly grouped across the four observed claim-size segments, ranging from **90.0% to 91.3%**. Transaction depth varied much more: active recipients averaged **4.33** seven-day transactions in the 625–875 ARB segment and **12.05** in the 2,500–10,250 ARB segment.\n\nThe descriptive pattern suggests that larger claims were associated with more intensive address activity, not materially broader basic participation. It does not establish that claim size caused later activity; recipients may differ on pre-airdrop characteristics that are not controlled here."
+      },
+      {
+        "id": "activity_segment_rate_chart",
+        "type": "chart",
+        "chartId": "chart_activity_segment_rates"
+      },
+      {
+        "id": "claim_size_depth_note",
+        "type": "markdown",
+        "sourceId": "src_post_claim_activity",
+        "body": "The participation chart shows the narrow spread in seven-day active-recipient rates. The next chart isolates transaction depth among active recipients, where the separation by claim-size segment is much larger."
+      },
+      {
+        "id": "activity_segment_depth_chart",
+        "type": "chart",
+        "chartId": "chart_activity_segment_depth"
+      },
+      {
+        "id": "activity_intensity_finding",
+        "type": "markdown",
+        "sourceId": "src_post_claim_activity",
+        "body": "## A small high-frequency group generated most seven-day transactions\n\nThe **68,422 recipients with 11 or more qualifying transactions** represented **11.7% of the cohort** but produced **2,560,456 transactions, or 66.1% of all seven-day transaction rows**. By contrast, the 2–5 transaction group was the largest recipient group at **40.4%**, yet contributed **17.5%** of transaction rows.\n\nBreadth and depth therefore answer different questions: the active-recipient rate shows how widely activity occurred, while the intensity distribution shows that most observed transaction volume came from a much smaller set of addresses."
+      },
+      {
+        "id": "activity_intensity_chart",
+        "type": "chart",
+        "chartId": "chart_activity_intensity"
+      },
+      {
+        "id": "scope",
+        "type": "markdown",
+        "sourceId": "src_claim_cohort",
+        "body": "## The validated cohort contains 583,137 unique recipients and 1.093B claimed ARB\n\nThe cohort covers observed `HasClaimed(address,uint256)` events from **23 March through 24 September 2023**. Each report row ultimately resolves to one validated claim event and one unique recipient. The cohort contains **583,137 claim events and recipients**, **583,131 distinct claim transactions**, and **1,092,811,500 claimed ARB**. Transaction hash alone is therefore not a unique event-grain key."
+      },
+      {
+        "id": "definitions",
+        "type": "markdown",
+        "body": "## Metric definitions keep transfer behavior separate from address activity\n\n- **Positive early outflow:** a positive, non-self ARB transfer from the recipient after exact claim order, measured in half-open elapsed windows of 24 hours and seven days.\n- **Claim-linked outflow proxy:** cumulative qualifying outflow capped at the recipient's claim amount.\n- **Retained-claim proxy:** claim amount minus the capped claim-linked outflow proxy.\n- **Transfer-derived total ARB balance proxy:** net signed ARB transfer legs at an exact cutoff, including pre-claim holdings, the claim transfer, and later inflows and outflows.\n- **Pre-claim-adjusted balance proxy:** transfer-derived total balance minus positive pre-claim balance, capped between zero and claim amount per recipient before aggregation.\n- **Post-claim activity:** a successful top-level Arbitrum transaction initiated by the claim recipient after exact claim order, measured in the same elapsed windows.\n- **Active recipient:** a recipient with at least one qualifying post-claim transaction in the stated window."
+      },
+      {
+        "id": "methodology",
+        "type": "markdown",
+        "body": "## Reproducibility depends on claim-grain tables and explicit event ordering\n\nThe claim cohort was decoded from raw Arbitrum logs and reconciled against decoded distributor-to-recipient ARB transfers. Event-level source tables were materialized in bounded BigQuery Sandbox chunks, then reduced to one row per validated claim recipient before chart aggregation. Claim and later-event order keys prevent same-block events that precede the claim from entering the elapsed windows.\n\nThe chart queries aggregate the claim-grain metric tables without row-level joins, so they do not multiply recipients. Versioned SQL documents source grain, join cardinality, time filters, and row-multiplication risk. The published charts are rebuilt from small versioned JSON artifacts and require no new BigQuery scan.\n\nFor the 7-day/30-day balance layer, incoming and outgoing ARB transfer legs are signed at claimant endpoints; exact block, transaction, and log order separates pre-claim legs, and cutoff windows include only events strictly before each elapsed boundary. Self-transfers net to zero."
+      },
+      {
+        "id": "limitations",
+        "type": "markdown",
+        "body": "## Internal QA is strong, but interpretation remains intentionally bounded\n\nDuplicate, critical-null, metric-domain, layer-reconciliation, bounded-subset, and deterministic wallet-sample checks passed for the full-cohort baselines. Chart totals reconcile exactly to their source metric tables. The cohort count was also compared with an independent public reference.\n\nImportant limitations remain:\n\n- Destination labels and DEX swaps are not classified, so early outflow is not a sales estimate.\n- Fungibility prevents exact attribution of specific airdropped token units.\n- Historical token-balance snapshots were unavailable; the 7-day/30-day result is reconstructed from validated transfer legs and is explicitly named a proxy.\n- Total balance above 100% of claim amount can reflect later inflow, while the adjusted aggregate proxy is capped per recipient.\n- Address activity is not proof of retained human usage, protocol engagement, or token retention.\n- The claim-size comparisons are descriptive and do not control for recipient selection or prior behavior.\n- No independent public benchmark was identified for the exact full-cohort early-outflow or post-claim activity metrics."
+      },
+      {
+        "id": "next_steps",
+        "type": "markdown",
+        "body": "## Recommended next steps\n\n1. Classify verified DEX swaps and reliably labeled exchange destinations before making any statement about sales behavior.\n2. Break post-claim transactions into protocol and action categories to distinguish simple address activity from sustained ecosystem engagement.\n3. Add a longer-window sensitivity analysis only after preserving the same claim grain, event-order rules, and QA controls."
+      },
+      {
+        "id": "further_questions",
+        "type": "markdown",
+        "body": "## Further questions\n\n- What share of early outflow can be linked to verified swaps, bridges, centralized exchanges, or transfers between addresses controlled by the same entity?\n- Which protocols and transaction types account for the observed seven-day activity?\n- How sensitive are the reported proxy measures to alternative, equally explicit transfer and destination definitions?"
+      }
+    ]
+  },
+  "snapshot": {
+    "version": 1,
+    "generatedAt": "2026-08-23",
+    "status": "ready",
+    "datasets": {
+      "headline_cohort": [
+        {
+          "recipients": 583137,
+          "claimed_arb": 1092811500
+        }
+      ],
+      "headline_early": [
+        {
+          "positive_outflow_rate_24h": 0.7878714607373567,
+          "positive_outflow_rate_7d": 0.8548780132284524,
+          "claim_linked_outflow_share_24h": 0.7304367733191569,
+          "claim_linked_outflow_share_7d": 0.8036567755393891
+        }
+      ],
+      "headline_activity": [
+        {
+          "active_recipient_rate_24h": 0.8275225204368785,
+          "active_recipient_rate_7d": 0.909302616709281
+        }
+      ],
+      "headline_balance": [
+        {
+          "adjusted_balance_proxy_share_7d": 0.217032634353017,
+          "adjusted_balance_proxy_share_30d": 0.142097290467593
+        }
+      ],
+      "early_timing": [
+        {
+          "bucket_order": 1,
+          "timing_bucket": "Within 1 hour",
+          "recipient_count": 354666,
+          "recipient_share": 0.6082035610842735
+        },
+        {
+          "bucket_order": 2,
+          "timing_bucket": "1 to <6 hours",
+          "recipient_count": 73038,
+          "recipient_share": 0.1252501556238071
+        },
+        {
+          "bucket_order": 3,
+          "timing_bucket": "6 to <24 hours",
+          "recipient_count": 31733,
+          "recipient_share": 0.05441774402927614
+        },
+        {
+          "bucket_order": 4,
+          "timing_bucket": "1 to <3 days",
+          "recipient_count": 19428,
+          "recipient_share": 0.03331635619074077
+        },
+        {
+          "bucket_order": 5,
+          "timing_bucket": "3 to <7 days",
+          "recipient_count": 19646,
+          "recipient_share": 0.0336901963003548
+        },
+        {
+          "bucket_order": 6,
+          "timing_bucket": "No positive outflow within 7d",
+          "recipient_count": 84626,
+          "recipient_share": 0.14512198677154767
+        }
+      ],
+      "early_composition": [
+        {
+          "window_order": 1,
+          "window_label": "Within 24 hours",
+          "measure": "Claim-linked outflow proxy",
+          "share": 0.7304367733191569,
+          "arb_amount": 798229705.9060678,
+          "claimed_arb": 1092811500.0
+        },
+        {
+          "window_order": 1,
+          "window_label": "Within 24 hours",
+          "measure": "Retained-claim proxy",
+          "share": 0.26956322668084304,
+          "arb_amount": 294581794.0939321,
+          "claimed_arb": 1092811500.0
+        },
+        {
+          "window_order": 2,
+          "window_label": "Within 7 days",
+          "measure": "Claim-linked outflow proxy",
+          "share": 0.8036567755393891,
+          "arb_amount": 878245366.3623631,
+          "claimed_arb": 1092811500.0
+        },
+        {
+          "window_order": 2,
+          "window_label": "Within 7 days",
+          "measure": "Retained-claim proxy",
+          "share": 0.19634322446061092,
+          "arb_amount": 214566133.6376369,
+          "claimed_arb": 1092811500.0
+        }
+      ],
+      "activity_timing": [
+        {
+          "bucket_order": 1,
+          "timing_bucket": "Within 1 hour",
+          "recipient_count": 378291,
+          "recipient_share": 0.6487171968165285
+        },
+        {
+          "bucket_order": 2,
+          "timing_bucket": "1 to <6 hours",
+          "recipient_count": 70216,
+          "recipient_share": 0.12041081255348228
+        },
+        {
+          "bucket_order": 3,
+          "timing_bucket": "6 to <24 hours",
+          "recipient_count": 34052,
+          "recipient_share": 0.058394511066867646
+        },
+        {
+          "bucket_order": 4,
+          "timing_bucket": "1 to <3 days",
+          "recipient_count": 23618,
+          "recipient_share": 0.04050163169203806
+        },
+        {
+          "bucket_order": 5,
+          "timing_bucket": "3 to <7 days",
+          "recipient_count": 24071,
+          "recipient_share": 0.04127846458036448
+        },
+        {
+          "bucket_order": 6,
+          "timing_bucket": "No activity within 7d",
+          "recipient_count": 52889,
+          "recipient_share": 0.090697383290719
+        }
+      ],
+      "activity_segment_rates": [
+        {
+          "segment_order": 1,
+          "claim_size_segment": "625–875 ARB",
+          "window": "Within 24 hours",
+          "active_recipient_rate": 0.8331753251595172,
+          "active_recipients": 156432,
+          "recipient_count": 187754
+        },
+        {
+          "segment_order": 1,
+          "claim_size_segment": "625–875 ARB",
+          "window": "Within 7 days",
+          "active_recipient_rate": 0.9116290465183166,
+          "active_recipients": 171162,
+          "recipient_count": 187754
+        },
+        {
+          "segment_order": 2,
+          "claim_size_segment": "1,125–1,250 ARB",
+          "window": "Within 24 hours",
+          "active_recipient_rate": 0.813302837690487,
+          "active_recipients": 91743,
+          "recipient_count": 112803
+        },
+        {
+          "segment_order": 2,
+          "claim_size_segment": "1,125–1,250 ARB",
+          "window": "Within 7 days",
+          "active_recipient_rate": 0.8997101140927103,
+          "active_recipients": 101490,
+          "recipient_count": 112803
+        },
+        {
+          "segment_order": 3,
+          "claim_size_segment": "1,500–2,250 ARB",
+          "window": "Within 24 hours",
+          "active_recipient_rate": 0.8351684061627862,
+          "active_recipients": 131073,
+          "recipient_count": 156942
+        },
+        {
+          "segment_order": 3,
+          "claim_size_segment": "1,500–2,250 ARB",
+          "window": "Within 7 days",
+          "active_recipient_rate": 0.9125409386907265,
+          "active_recipients": 143216,
+          "recipient_count": 156942
+        },
+        {
+          "segment_order": 4,
+          "claim_size_segment": "2,500–10,250 ARB",
+          "window": "Within 24 hours",
+          "active_recipient_rate": 0.8222910266002325,
+          "active_recipients": 103311,
+          "recipient_count": 125638
+        },
+        {
+          "segment_order": 4,
+          "claim_size_segment": "2,500–10,250 ARB",
+          "window": "Within 7 days",
+          "active_recipient_rate": 0.9103933523297092,
+          "active_recipients": 114380,
+          "recipient_count": 125638
+        }
+      ],
+      "activity_segment_depth": [
+        {
+          "segment_order": 1,
+          "claim_size_segment": "625–875 ARB",
+          "average_transactions_per_active_recipient_7d": 4.33085614797677,
+          "average_active_utc_days_per_active_recipient_7d": 1.6867470583423891,
+          "average_distinct_targets_per_active_recipient_7d": 2.577306878863299,
+          "active_recipients_7d": 171162
+        },
+        {
+          "segment_order": 2,
+          "claim_size_segment": "1,125–1,250 ARB",
+          "average_transactions_per_active_recipient_7d": 4.751620849344763,
+          "average_active_utc_days_per_active_recipient_7d": 1.7156370085722732,
+          "average_distinct_targets_per_active_recipient_7d": 2.7175879396984923,
+          "active_recipients_7d": 101490
+        },
+        {
+          "segment_order": 3,
+          "claim_size_segment": "1,500–2,250 ARB",
+          "average_transactions_per_active_recipient_7d": 8.87162747179086,
+          "average_active_utc_days_per_active_recipient_7d": 1.9167341637805833,
+          "average_distinct_targets_per_active_recipient_7d": 3.349534968159982,
+          "active_recipients_7d": 143216
+        },
+        {
+          "segment_order": 4,
+          "claim_size_segment": "2,500–10,250 ARB",
+          "average_transactions_per_active_recipient_7d": 12.051853470886519,
+          "average_active_utc_days_per_active_recipient_7d": 2.3995016611295683,
+          "average_distinct_targets_per_active_recipient_7d": 4.763140409162441,
+          "active_recipients_7d": 114380
+        }
+      ],
+      "activity_intensity": [
+        {
+          "bucket_order": 1,
+          "transaction_count_bucket": "No activity within 7d",
+          "measure": "Share of recipients",
+          "share": 0.090697383290719,
+          "recipient_count": 52889,
+          "successful_transaction_rows": 0
+        },
+        {
+          "bucket_order": 1,
+          "transaction_count_bucket": "No activity within 7d",
+          "measure": "Share of successful transactions",
+          "share": 0.0,
+          "recipient_count": 52889,
+          "successful_transaction_rows": 0
+        },
+        {
+          "bucket_order": 2,
+          "transaction_count_bucket": "1 transaction",
+          "measure": "Share of recipients",
+          "share": 0.28178112519013543,
+          "recipient_count": 164317,
+          "successful_transaction_rows": 164317
+        },
+        {
+          "bucket_order": 2,
+          "transaction_count_bucket": "1 transaction",
+          "measure": "Share of successful transactions",
+          "share": 0.042430995437138644,
+          "recipient_count": 164317,
+          "successful_transaction_rows": 164317
+        },
+        {
+          "bucket_order": 3,
+          "transaction_count_bucket": "2–5 transactions",
+          "measure": "Share of recipients",
+          "share": 0.4040062626792675,
+          "recipient_count": 235591,
+          "successful_transaction_rows": 679255
+        },
+        {
+          "bucket_order": 3,
+          "transaction_count_bucket": "2–5 transactions",
+          "measure": "Share of successful transactions",
+          "share": 0.17540160668496632,
+          "recipient_count": 235591,
+          "successful_transaction_rows": 679255
+        },
+        {
+          "bucket_order": 4,
+          "transaction_count_bucket": "6–10 transactions",
+          "measure": "Share of recipients",
+          "share": 0.106180880307715,
+          "recipient_count": 61918,
+          "successful_transaction_rows": 468542
+        },
+        {
+          "bucket_order": 4,
+          "transaction_count_bucket": "6–10 transactions",
+          "measure": "Share of successful transactions",
+          "share": 0.12098993691527848,
+          "recipient_count": 61918,
+          "successful_transaction_rows": 468542
+        },
+        {
+          "bucket_order": 5,
+          "transaction_count_bucket": "11+ transactions",
+          "measure": "Share of recipients",
+          "share": 0.11733434853216311,
+          "recipient_count": 68422,
+          "successful_transaction_rows": 2560456
+        },
+        {
+          "bucket_order": 5,
+          "transaction_count_bucket": "11+ transactions",
+          "measure": "Share of successful transactions",
+          "share": 0.6611774609626165,
+          "recipient_count": 68422,
+          "successful_transaction_rows": 2560456
+        }
+      ],
+      "balance_bucket_distribution": [
+        {
+          "cutoff_order": 1,
+          "cutoff_label": "7 days after claim",
+          "bucket_order": 1,
+          "balance_to_claim_bucket": "0%",
+          "recipient_count": 365994,
+          "recipient_share": 0.6276295278810983
+        },
+        {
+          "cutoff_order": 1,
+          "cutoff_label": "7 days after claim",
+          "bucket_order": 2,
+          "balance_to_claim_bucket": "<25%",
+          "recipient_count": 97883,
+          "recipient_share": 0.1678559240795902
+        },
+        {
+          "cutoff_order": 1,
+          "cutoff_label": "7 days after claim",
+          "bucket_order": 3,
+          "balance_to_claim_bucket": "25-75%",
+          "recipient_count": 20104,
+          "recipient_share": 0.034475603503121906
+        },
+        {
+          "cutoff_order": 1,
+          "cutoff_label": "7 days after claim",
+          "bucket_order": 4,
+          "balance_to_claim_bucket": "75-100%",
+          "recipient_count": 88386,
+          "recipient_share": 0.15156987123094573
+        },
+        {
+          "cutoff_order": 1,
+          "cutoff_label": "7 days after claim",
+          "bucket_order": 5,
+          "balance_to_claim_bucket": ">100%",
+          "recipient_count": 10770,
+          "recipient_share": 0.018469073305243878
+        },
+        {
+          "cutoff_order": 2,
+          "cutoff_label": "30 days after claim",
+          "bucket_order": 1,
+          "balance_to_claim_bucket": "0%",
+          "recipient_count": 375348,
+          "recipient_share": 0.643670355336739
+        },
+        {
+          "cutoff_order": 2,
+          "cutoff_label": "30 days after claim",
+          "bucket_order": 2,
+          "balance_to_claim_bucket": "<25%",
+          "recipient_count": 127912,
+          "recipient_share": 0.2193515417474796
+        },
+        {
+          "cutoff_order": 2,
+          "cutoff_label": "30 days after claim",
+          "bucket_order": 3,
+          "balance_to_claim_bucket": "25-75%",
+          "recipient_count": 17726,
+          "recipient_share": 0.03039765955513027
+        },
+        {
+          "cutoff_order": 2,
+          "cutoff_label": "30 days after claim",
+          "bucket_order": 4,
+          "balance_to_claim_bucket": "75-100%",
+          "recipient_count": 53530,
+          "recipient_share": 0.09179661040201531
+        },
+        {
+          "cutoff_order": 2,
+          "cutoff_label": "30 days after claim",
+          "bucket_order": 5,
+          "balance_to_claim_bucket": ">100%",
+          "recipient_count": 8621,
+          "recipient_share": 0.014783832958635792
+        }
+      ],
+      "balance_adjusted_proxy": [
+        {
+          "cutoff_order": 1,
+          "cutoff_label": "7 days after claim",
+          "adjusted_retained_claim_proxy_arb": 237175758.69627175,
+          "adjusted_retained_claim_proxy_share": 0.217032634353017
+        },
+        {
+          "cutoff_order": 2,
+          "cutoff_label": "30 days after claim",
+          "adjusted_retained_claim_proxy_arb": 155285553.1418259,
+          "adjusted_retained_claim_proxy_share": 0.142097290467593
+        }
+      ]
+    },
+    "accessIssues": []
+  },
+  "sources": [
+    {
+      "id": "src_claim_cohort",
+      "label": "Validated ARB claim cohort profile",
+      "path": "sql/03_profile_claim_cohort.sql",
+      "query": {
+        "engine": "BigQuery Standard SQL",
+        "language": "GoogleSQL",
+        "executed_at": "2026-08-11",
+        "description": "Profiles the raw HasClaimed event cohort and its data-quality controls.",
+        "sql": "-- Profile the complete ARB HasClaimed event cohort before materializing it.\n-- Review the BigQuery byte estimate before running this query.\n-- WARNING: the 2026-08-11 validation run processed 357.92 GB. Do not rerun\n-- the full public-table scan without an explicit quota and storage plan.\n-- Do not treat the provisional totals as final analytical metrics until the\n-- duplicate, NULL, manual-sample, and independent-reconciliation checks pass.\n--\n-- Output grain:\n--   Exactly one summary row for all matching HasClaimed event logs in the\n--   bounded claim-period window.\n--\n-- Source table and source grain:\n--   bigquery-public-data.goog_blockchain_arbitrum_one_us.logs\n--   One source row represents one event log emitted by a transaction.\n--\n-- Join keys and expected cardinality:\n--   No JOIN. Window functions count matching rows by decoded recipient.\n--\n-- Filters:\n--   1. block_timestamp >= 2023-03-23 00:00:00 UTC\n--   2. block_timestamp <  2023-10-01 00:00:00 UTC\n--   3. TokenDistributor contract address\n--   4. HasClaimed(address,uint256) topic0\n--   5. At least two topics so topics[1] can contain the recipient\n--\n-- The upper timestamp deliberately includes all of September. The query\n-- reports the observed maximum claim timestamp, which will later be compared\n-- with the deployed contract's claim-period boundary.\n--\n-- Row-multiplication risk:\n--   None from JOINs. Multiple matching logs for one recipient remain visible\n--   in the duplicate checks instead of being silently deduplicated.\n--\n-- Decoding:\n--   recipient = final 20 bytes of topics[1]\n--   amount     = uint256 in data, recombined as BIGNUMERIC from two chunks\n--   ARB units  = raw amount / 10^18\n--\n-- Official source references (accessed 2026-08-11):\n--   https://github.com/ArbitrumFoundation/governance/blob/main/src/TokenDistributor.sol\n--   https://docs.cloud.google.com/blockchain-analytics/docs/schema\n--\n-- Validation run (2026-08-11):\n--   583,137 event rows and 583,137 distinct recipients.\n--   583,131 distinct transaction hashes; transaction hash is not unique.\n--   0 duplicated recipients, critical NULLs, or decoding failures.\n--   Observed claim range: 2023-03-23 13:01:22 UTC through\n--   2023-09-24 20:12:52 UTC.\n--   Provisional claimed amount: 1,092,811,500 ARB.\n--   Actual processing and billed volume: 357.92 GB.\n\nWITH raw_claim_logs AS (\n  SELECT\n    block_timestamp AS claim_timestamp,\n    transaction_hash AS claim_transaction_hash,\n    topics[SAFE_OFFSET(1)] AS recipient_topic,\n    data AS amount_data\n  FROM\n    `bigquery-public-data.goog_blockchain_arbitrum_one_us.logs`\n  WHERE\n    block_timestamp >= TIMESTAMP('2023-03-23 00:00:00+00')\n    AND block_timestamp < TIMESTAMP('2023-10-01 00:00:00+00')\n    AND address = LOWER('0x67a24CE4321aB3aF51c2D0a4801c3E111D88C9d9')\n    AND ARRAY_LENGTH(topics) > 1\n    AND topics[SAFE_OFFSET(0)] =\n      '0x8629b200ebe43db58ad688b85131d53251f3f3be4c14933b4641aeebacf1c08c'\n),\n\ndecoded_parts AS (\n  SELECT\n    claim_timestamp,\n    claim_transaction_hash,\n    CASE\n      WHEN REGEXP_CONTAINS(recipient_topic, r'^0x[0-9a-fA-F]{64}$')\n        THEN CONCAT('0x', RIGHT(recipient_topic, 40))\n    END AS recipient,\n    CASE\n      WHEN REGEXP_CONTAINS(amount_data, r'^0x[0-9a-fA-F]{64}$')\n        THEN SAFE_CAST(\n          CONCAT('0x', SUBSTR(RIGHT(amount_data, 30), 1, 15)) AS INT64\n        )\n    END AS amount_high_chunk,\n    CASE\n      WHEN REGEXP_CONTAINS(amount_data, r'^0x[0-9a-fA-F]{64}$')\n        THEN SAFE_CAST(CONCAT('0x', RIGHT(amount_data, 15)) AS INT64)\n    END AS amount_low_chunk\n  FROM raw_claim_logs\n),\n\ndecoded_claims AS (\n  SELECT\n    claim_timestamp,\n    claim_transaction_hash,\n    recipient,\n    CASE\n      WHEN amount_high_chunk IS NOT NULL AND amount_low_chunk IS NOT NULL\n        THEN CAST(amount_high_chunk AS BIGNUMERIC)\n          * CAST(1152921504606846976 AS BIGNUMERIC)\n          + CAST(amount_low_chunk AS BIGNUMERIC)\n    END AS amount_raw\n  FROM decoded_parts\n),\n\nquality_flags AS (\n  SELECT\n    *,\n    COUNT(*) OVER (PARTITION BY recipient) AS recipient_event_rows\n  FROM decoded_claims\n)\n\nSELECT\n  COUNT(*) AS claim_event_rows,\n  COUNT(DISTINCT claim_transaction_hash) AS distinct_claim_transactions,\n  COUNT(DISTINCT recipient) AS distinct_recipients,\n  COUNT(DISTINCT IF(recipient_event_rows > 1, recipient, NULL))\n    AS recipients_with_multiple_claim_events,\n  COUNTIF(recipient IS NOT NULL) - COUNT(DISTINCT recipient)\n    AS extra_event_rows_above_one_per_recipient,\n  COUNTIF(claim_transaction_hash IS NULL) AS null_transaction_hash_rows,\n  COUNTIF(recipient IS NULL) AS invalid_or_null_recipient_rows,\n  COUNTIF(amount_raw IS NULL) AS invalid_or_null_amount_rows,\n  MIN(claim_timestamp) AS first_claim_timestamp,\n  MAX(claim_timestamp) AS last_claim_timestamp,\n  SUM(amount_raw) AS provisional_total_claimed_raw,\n  SUM(amount_raw) / CAST(1000000000000000000 AS BIGNUMERIC)\n    AS provisional_total_claimed_arb\nFROM quality_flags;\n",
+        "tables_used": [
+          "bigquery-public-data.goog_blockchain_arbitrum_one_us.logs"
+        ],
+        "filters": [
+          "TokenDistributor HasClaimed logs only",
+          "Claims observed from 23 March through 24 September 2023",
+          "At least two log topics so the indexed recipient can be decoded"
+        ],
+        "metric_definitions": [
+          "Claim recipient: the final 20 bytes of indexed topic 1.",
+          "Claim amount: uint256 event data normalized from raw units using 18 decimals.",
+          "Output grain: one cohort-level QA summary row."
+        ]
+      }
+    },
+    {
+      "id": "src_early_outflow",
+      "label": "Validated full-cohort early-outflow chart aggregates",
+      "path": "sql/50_export_early_outflow_chart_data.sql",
+      "query": {
+        "engine": "BigQuery Standard SQL",
+        "language": "GoogleSQL",
+        "executed_at": "2026-08-15",
+        "description": "Exports chart-ready early-outflow aggregates from the validated claim-grain metric table.",
+        "sql": "-- Export compact, chart-ready full-cohort early-outflow aggregates as JSON.\n-- Always dry-run immediately before execution.\n--\n-- Output grain:\n--   One JSON string containing three small datasets:\n--   1) one row per elapsed window;\n--   2) one row per claim-size segment;\n--   3) one row per mutually exclusive first-positive-outflow timing bucket.\n--\n-- Source table and source grain:\n--   YOUR_DATASET_ID.early_outflow_metrics_full_cohort\n--   One validated claim event and unique recipient per row.\n--\n-- Join keys and expected cardinality:\n--   No row-level JOIN. Independent aggregations read the same claim-grain\n--   source. Window rows are reshaped from one cohort-total row.\n--\n-- Filters and time boundaries:\n--   No claim rows are filtered. Stored metrics use elapsed, half-open windows\n--   of [claim timestamp, +24 hours) and [claim timestamp, +7 days).\n--\n-- Row-multiplication risk:\n--   None. Every chart dataset aggregates the claim-grain source directly.\n--\n-- Segment policy:\n--   Boundaries are the observed approximate cohort quartiles from\n--   sql/49_profile_chart_dimensions.sql: 875, 1,250, and 2,250 ARB.\n\nWITH metrics AS (\n  SELECT\n    claim_amount_raw,\n    claim_amount_raw / POW(CAST(10 AS BIGNUMERIC), 18) AS claim_amount_arb,\n    positive_outflow_event_count_24h,\n    gross_positive_outflow_raw_24h,\n    claim_linked_outflow_raw_24h,\n    positive_outflow_event_count_7d,\n    gross_positive_outflow_raw_7d,\n    claim_linked_outflow_raw_7d,\n    seconds_to_first_positive_outflow_7d\n  FROM\n    `YOUR_DATASET_ID.early_outflow_metrics_full_cohort`\n),\n\ncohort_totals AS (\n  SELECT\n    COUNT(*) AS recipient_count,\n    SUM(claim_amount_raw) AS claimed_raw,\n    COUNTIF(positive_outflow_event_count_24h > 0)\n      AS recipients_with_positive_outflow_24h,\n    SUM(gross_positive_outflow_raw_24h) AS gross_positive_outflow_raw_24h,\n    SUM(claim_linked_outflow_raw_24h) AS claim_linked_outflow_raw_24h,\n    COUNTIF(positive_outflow_event_count_7d > 0)\n      AS recipients_with_positive_outflow_7d,\n    SUM(gross_positive_outflow_raw_7d) AS gross_positive_outflow_raw_7d,\n    SUM(claim_linked_outflow_raw_7d) AS claim_linked_outflow_raw_7d\n  FROM\n    metrics\n),\n\nwindow_summary AS (\n  SELECT\n    1 AS window_order,\n    'Within 24 hours' AS window_label,\n    recipient_count,\n    recipients_with_positive_outflow_24h\n      AS recipients_with_positive_outflow,\n    recipient_count - recipients_with_positive_outflow_24h\n      AS recipients_without_positive_outflow,\n    SAFE_DIVIDE(recipients_with_positive_outflow_24h, recipient_count)\n      AS recipient_positive_outflow_rate,\n    SAFE_DIVIDE(\n      recipient_count - recipients_with_positive_outflow_24h,\n      recipient_count\n    ) AS recipient_no_positive_outflow_rate,\n    claimed_raw / POW(CAST(10 AS BIGNUMERIC), 18) AS claimed_arb,\n    gross_positive_outflow_raw_24h / POW(CAST(10 AS BIGNUMERIC), 18)\n      AS gross_positive_outflow_arb,\n    claim_linked_outflow_raw_24h / POW(CAST(10 AS BIGNUMERIC), 18)\n      AS claim_linked_outflow_arb,\n    SAFE_DIVIDE(claim_linked_outflow_raw_24h, claimed_raw)\n      AS claim_linked_outflow_share,\n    (claimed_raw - claim_linked_outflow_raw_24h) /\n      POW(CAST(10 AS BIGNUMERIC), 18) AS retained_claim_proxy_arb,\n    SAFE_DIVIDE(claimed_raw - claim_linked_outflow_raw_24h, claimed_raw)\n      AS retained_claim_proxy_share\n  FROM\n    cohort_totals\n\n  UNION ALL\n\n  SELECT\n    2 AS window_order,\n    'Within 7 days' AS window_label,\n    recipient_count,\n    recipients_with_positive_outflow_7d\n      AS recipients_with_positive_outflow,\n    recipient_count - recipients_with_positive_outflow_7d\n      AS recipients_without_positive_outflow,\n    SAFE_DIVIDE(recipients_with_positive_outflow_7d, recipient_count)\n      AS recipient_positive_outflow_rate,\n    SAFE_DIVIDE(\n      recipient_count - recipients_with_positive_outflow_7d,\n      recipient_count\n    ) AS recipient_no_positive_outflow_rate,\n    claimed_raw / POW(CAST(10 AS BIGNUMERIC), 18) AS claimed_arb,\n    gross_positive_outflow_raw_7d / POW(CAST(10 AS BIGNUMERIC), 18)\n      AS gross_positive_outflow_arb,\n    claim_linked_outflow_raw_7d / POW(CAST(10 AS BIGNUMERIC), 18)\n      AS claim_linked_outflow_arb,\n    SAFE_DIVIDE(claim_linked_outflow_raw_7d, claimed_raw)\n      AS claim_linked_outflow_share,\n    (claimed_raw - claim_linked_outflow_raw_7d) /\n      POW(CAST(10 AS BIGNUMERIC), 18) AS retained_claim_proxy_arb,\n    SAFE_DIVIDE(claimed_raw - claim_linked_outflow_raw_7d, claimed_raw)\n      AS retained_claim_proxy_share\n  FROM\n    cohort_totals\n),\n\nsegment_labeled AS (\n  SELECT\n    CASE\n      WHEN claim_amount_arb <= 875 THEN 1\n      WHEN claim_amount_arb <= 1250 THEN 2\n      WHEN claim_amount_arb <= 2250 THEN 3\n      ELSE 4\n    END AS segment_order,\n    CASE\n      WHEN claim_amount_arb <= 875 THEN '625–875 ARB'\n      WHEN claim_amount_arb <= 1250 THEN '1,125–1,250 ARB'\n      WHEN claim_amount_arb <= 2250 THEN '1,500–2,250 ARB'\n      ELSE '2,500–10,250 ARB'\n    END AS claim_size_segment,\n    *\n  FROM\n    metrics\n),\n\nsegment_summary AS (\n  SELECT\n    segment_order,\n    claim_size_segment,\n    MIN(claim_amount_arb) AS minimum_claim_amount_arb,\n    MAX(claim_amount_arb) AS maximum_claim_amount_arb,\n    COUNT(*) AS recipient_count,\n    SUM(claim_amount_raw) AS claimed_raw,\n    COUNTIF(positive_outflow_event_count_24h > 0)\n      AS recipients_with_positive_outflow_24h,\n    SUM(gross_positive_outflow_raw_24h) AS gross_positive_outflow_raw_24h,\n    SUM(claim_linked_outflow_raw_24h) AS claim_linked_outflow_raw_24h,\n    COUNTIF(positive_outflow_event_count_7d > 0)\n      AS recipients_with_positive_outflow_7d,\n    SUM(gross_positive_outflow_raw_7d) AS gross_positive_outflow_raw_7d,\n    SUM(claim_linked_outflow_raw_7d) AS claim_linked_outflow_raw_7d\n  FROM\n    segment_labeled\n  GROUP BY\n    segment_order,\n    claim_size_segment\n),\n\nsegment_chart AS (\n  SELECT\n    segment.segment_order,\n    segment.claim_size_segment,\n    segment.minimum_claim_amount_arb,\n    segment.maximum_claim_amount_arb,\n    segment.recipient_count,\n    SAFE_DIVIDE(segment.recipient_count, cohort.recipient_count)\n      AS recipient_share,\n    segment.claimed_raw / POW(CAST(10 AS BIGNUMERIC), 18) AS claimed_arb,\n    SAFE_DIVIDE(segment.claimed_raw, cohort.claimed_raw) AS claimed_share,\n    segment.recipients_with_positive_outflow_24h,\n    SAFE_DIVIDE(\n      segment.recipients_with_positive_outflow_24h,\n      segment.recipient_count\n    ) AS recipient_positive_outflow_rate_24h,\n    segment.gross_positive_outflow_raw_24h /\n      POW(CAST(10 AS BIGNUMERIC), 18) AS gross_positive_outflow_arb_24h,\n    segment.claim_linked_outflow_raw_24h /\n      POW(CAST(10 AS BIGNUMERIC), 18) AS claim_linked_outflow_arb_24h,\n    SAFE_DIVIDE(segment.claim_linked_outflow_raw_24h, segment.claimed_raw)\n      AS claim_linked_outflow_share_24h,\n    SAFE_DIVIDE(\n      segment.claimed_raw - segment.claim_linked_outflow_raw_24h,\n      segment.claimed_raw\n    ) AS retained_claim_proxy_share_24h,\n    segment.recipients_with_positive_outflow_7d,\n    SAFE_DIVIDE(\n      segment.recipients_with_positive_outflow_7d,\n      segment.recipient_count\n    ) AS recipient_positive_outflow_rate_7d,\n    segment.gross_positive_outflow_raw_7d /\n      POW(CAST(10 AS BIGNUMERIC), 18) AS gross_positive_outflow_arb_7d,\n    segment.claim_linked_outflow_raw_7d /\n      POW(CAST(10 AS BIGNUMERIC), 18) AS claim_linked_outflow_arb_7d,\n    SAFE_DIVIDE(segment.claim_linked_outflow_raw_7d, segment.claimed_raw)\n      AS claim_linked_outflow_share_7d,\n    SAFE_DIVIDE(\n      segment.claimed_raw - segment.claim_linked_outflow_raw_7d,\n      segment.claimed_raw\n    ) AS retained_claim_proxy_share_7d\n  FROM\n    segment_summary AS segment\n  CROSS JOIN\n    cohort_totals AS cohort\n),\n\ntiming_labeled AS (\n  SELECT\n    CASE\n      WHEN seconds_to_first_positive_outflow_7d IS NULL THEN 6\n      WHEN seconds_to_first_positive_outflow_7d < 3600 THEN 1\n      WHEN seconds_to_first_positive_outflow_7d < 21600 THEN 2\n      WHEN seconds_to_first_positive_outflow_7d < 86400 THEN 3\n      WHEN seconds_to_first_positive_outflow_7d < 259200 THEN 4\n      WHEN seconds_to_first_positive_outflow_7d < 604800 THEN 5\n      ELSE 7\n    END AS bucket_order,\n    CASE\n      WHEN seconds_to_first_positive_outflow_7d IS NULL\n        THEN 'No positive outflow within 7d'\n      WHEN seconds_to_first_positive_outflow_7d < 3600\n        THEN 'Within 1 hour'\n      WHEN seconds_to_first_positive_outflow_7d < 21600\n        THEN '1 to <6 hours'\n      WHEN seconds_to_first_positive_outflow_7d < 86400\n        THEN '6 to <24 hours'\n      WHEN seconds_to_first_positive_outflow_7d < 259200\n        THEN '1 to <3 days'\n      WHEN seconds_to_first_positive_outflow_7d < 604800\n        THEN '3 to <7 days'\n      ELSE 'Invalid: outside seven-day window'\n    END AS timing_bucket\n  FROM\n    metrics\n),\n\ntiming_summary AS (\n  SELECT\n    timing.bucket_order,\n    timing.timing_bucket,\n    COUNT(*) AS recipient_count,\n    SAFE_DIVIDE(COUNT(*), cohort.recipient_count) AS recipient_share\n  FROM\n    timing_labeled AS timing\n  CROSS JOIN\n    cohort_totals AS cohort\n  GROUP BY\n    timing.bucket_order,\n    timing.timing_bucket,\n    cohort.recipient_count\n)\n\nSELECT\n  TO_JSON_STRING(STRUCT(\n    '2023-03-23 through 2023-09-24 claim cohort' AS cohort,\n    'Positive non-self ARB transfers; not classified as sales'\n      AS outflow_definition,\n    'Capped at each claim amount; proxy because ARB is fungible'\n      AS claim_linked_outflow_definition,\n    (\n      SELECT ARRAY_AGG(window_row ORDER BY window_order)\n      FROM window_summary AS window_row\n    ) AS window_summary,\n    (\n      SELECT ARRAY_AGG(segment_row ORDER BY segment_order)\n      FROM segment_chart AS segment_row\n    ) AS claim_size_segments,\n    (\n      SELECT ARRAY_AGG(timing_row ORDER BY bucket_order)\n      FROM timing_summary AS timing_row\n    ) AS first_positive_outflow_timing\n  )) AS chart_data_json;\n",
+        "tables_used": [
+          "YOUR_PROJECT_ID.YOUR_DATASET_ID.early_outflow_metrics_full_cohort"
+        ],
+        "filters": [
+          "All 583,137 validated claim recipients",
+          "Positive non-self ARB transfers after exact claim order",
+          "Half-open elapsed windows of 24 hours and seven days"
+        ],
+        "metric_definitions": [
+          "Positive early outflow counts qualifying outgoing ARB transfers and is not a sales label.",
+          "Claim-linked outflow is cumulative positive outflow capped at each recipient's claim amount.",
+          "Retained-claim proxy equals claim amount minus capped claim-linked outflow."
+        ]
+      }
+    },
+    {
+      "id": "src_post_claim_activity",
+      "label": "Validated full-cohort post-claim activity chart aggregates",
+      "path": "sql/75_export_post_claim_activity_chart_data.sql",
+      "query": {
+        "engine": "BigQuery Standard SQL",
+        "language": "GoogleSQL",
+        "executed_at": "2026-08-19",
+        "description": "Exports chart-ready address-activity aggregates from the validated claim-grain metric table.",
+        "sql": "-- Export compact, chart-ready full-cohort post-claim activity aggregates as\n-- JSON. Always dry-run immediately before execution.\n--\n-- Analytical meaning:\n--   Activity is a successful top-level Arbitrum transaction initiated by a\n--   validated claim recipient after exact claim order. It is address activity,\n--   not proof of retained human usage, protocol engagement, token retention,\n--   or sales.\n--\n-- Output grain:\n--   One JSON string containing four small datasets:\n--   1) one row per elapsed window;\n--   2) one row per claim-size segment;\n--   3) one row per mutually exclusive first-activity timing bucket;\n--   4) one row per mutually exclusive seven-day transaction-count bucket.\n--\n-- Source table and source grain:\n--   YOUR_DATASET_ID.post_claim_activity_metrics_full_cohort\n--   One validated claim event and unique recipient per row.\n--\n-- Join keys and expected cardinality:\n--   No row-level JOIN. Independent aggregations read the same claim-grain\n--   source. Window rows are reshaped from one cohort-total row.\n--\n-- Filters and time boundaries:\n--   No claim rows are filtered. Stored metrics use elapsed, half-open windows\n--   of [claim timestamp, +24 hours) and [claim timestamp, +7 days).\n--\n-- Row-multiplication risk:\n--   None. Every chart dataset aggregates the claim-grain source directly.\n--\n-- Segment policy:\n--   Claim-size boundaries reuse the observed approximate cohort quartiles\n--   established for the early-outflow charts: 875, 1,250, and 2,250 ARB.\n\nWITH metrics AS (\n  SELECT\n    claim_amount_raw,\n    claim_amount_raw / POW(CAST(10 AS BIGNUMERIC), 18) AS claim_amount_arb,\n    successful_transaction_count_24h,\n    successful_transaction_count_7d,\n    active_utc_day_count_7d,\n    distinct_target_count_7d,\n    seconds_to_first_activity_7d\n  FROM\n    `YOUR_DATASET_ID.post_claim_activity_metrics_full_cohort`\n),\n\ncohort_totals AS (\n  SELECT\n    COUNT(*) AS recipient_count,\n    SUM(claim_amount_raw) AS claimed_raw,\n    COUNTIF(successful_transaction_count_24h > 0)\n      AS active_recipients_24h,\n    SUM(successful_transaction_count_24h) AS activity_transaction_rows_24h,\n    COUNTIF(successful_transaction_count_7d > 0)\n      AS active_recipients_7d,\n    SUM(successful_transaction_count_7d) AS activity_transaction_rows_7d,\n    SUM(active_utc_day_count_7d) AS active_utc_day_count_7d,\n    SUM(distinct_target_count_7d) AS distinct_target_count_7d\n  FROM\n    metrics\n),\n\nwindow_summary AS (\n  SELECT\n    1 AS window_order,\n    'Within 24 hours' AS window_label,\n    recipient_count,\n    active_recipients_24h AS active_recipients,\n    recipient_count - active_recipients_24h AS inactive_recipients,\n    SAFE_DIVIDE(active_recipients_24h, recipient_count)\n      AS active_recipient_rate,\n    SAFE_DIVIDE(recipient_count - active_recipients_24h, recipient_count)\n      AS inactive_recipient_rate,\n    activity_transaction_rows_24h AS successful_transaction_rows,\n    SAFE_DIVIDE(activity_transaction_rows_24h, recipient_count)\n      AS average_transactions_per_recipient,\n    SAFE_DIVIDE(activity_transaction_rows_24h, active_recipients_24h)\n      AS average_transactions_per_active_recipient\n  FROM\n    cohort_totals\n\n  UNION ALL\n\n  SELECT\n    2 AS window_order,\n    'Within 7 days' AS window_label,\n    recipient_count,\n    active_recipients_7d AS active_recipients,\n    recipient_count - active_recipients_7d AS inactive_recipients,\n    SAFE_DIVIDE(active_recipients_7d, recipient_count)\n      AS active_recipient_rate,\n    SAFE_DIVIDE(recipient_count - active_recipients_7d, recipient_count)\n      AS inactive_recipient_rate,\n    activity_transaction_rows_7d AS successful_transaction_rows,\n    SAFE_DIVIDE(activity_transaction_rows_7d, recipient_count)\n      AS average_transactions_per_recipient,\n    SAFE_DIVIDE(activity_transaction_rows_7d, active_recipients_7d)\n      AS average_transactions_per_active_recipient\n  FROM\n    cohort_totals\n),\n\nsegment_labeled AS (\n  SELECT\n    CASE\n      WHEN claim_amount_arb <= 875 THEN 1\n      WHEN claim_amount_arb <= 1250 THEN 2\n      WHEN claim_amount_arb <= 2250 THEN 3\n      ELSE 4\n    END AS segment_order,\n    CASE\n      WHEN claim_amount_arb <= 875 THEN '625–875 ARB'\n      WHEN claim_amount_arb <= 1250 THEN '1,125–1,250 ARB'\n      WHEN claim_amount_arb <= 2250 THEN '1,500–2,250 ARB'\n      ELSE '2,500–10,250 ARB'\n    END AS claim_size_segment,\n    *\n  FROM\n    metrics\n),\n\nsegment_summary AS (\n  SELECT\n    segment_order,\n    claim_size_segment,\n    MIN(claim_amount_arb) AS minimum_claim_amount_arb,\n    MAX(claim_amount_arb) AS maximum_claim_amount_arb,\n    COUNT(*) AS recipient_count,\n    SUM(claim_amount_raw) AS claimed_raw,\n    COUNTIF(successful_transaction_count_24h > 0)\n      AS active_recipients_24h,\n    SUM(successful_transaction_count_24h) AS activity_transaction_rows_24h,\n    COUNTIF(successful_transaction_count_7d > 0)\n      AS active_recipients_7d,\n    SUM(successful_transaction_count_7d) AS activity_transaction_rows_7d,\n    SUM(active_utc_day_count_7d) AS active_utc_day_count_7d,\n    SUM(distinct_target_count_7d) AS distinct_target_count_7d\n  FROM\n    segment_labeled\n  GROUP BY\n    segment_order,\n    claim_size_segment\n),\n\nsegment_chart AS (\n  SELECT\n    segment.segment_order,\n    segment.claim_size_segment,\n    segment.minimum_claim_amount_arb,\n    segment.maximum_claim_amount_arb,\n    segment.recipient_count,\n    SAFE_DIVIDE(segment.recipient_count, cohort.recipient_count)\n      AS recipient_share,\n    segment.claimed_raw / POW(CAST(10 AS BIGNUMERIC), 18) AS claimed_arb,\n    SAFE_DIVIDE(segment.claimed_raw, cohort.claimed_raw) AS claimed_share,\n    segment.active_recipients_24h,\n    SAFE_DIVIDE(segment.active_recipients_24h, segment.recipient_count)\n      AS active_recipient_rate_24h,\n    segment.activity_transaction_rows_24h,\n    SAFE_DIVIDE(\n      segment.activity_transaction_rows_24h,\n      segment.active_recipients_24h\n    ) AS average_transactions_per_active_recipient_24h,\n    segment.active_recipients_7d,\n    SAFE_DIVIDE(segment.active_recipients_7d, segment.recipient_count)\n      AS active_recipient_rate_7d,\n    segment.activity_transaction_rows_7d,\n    SAFE_DIVIDE(\n      segment.activity_transaction_rows_7d,\n      segment.active_recipients_7d\n    ) AS average_transactions_per_active_recipient_7d,\n    SAFE_DIVIDE(\n      segment.active_utc_day_count_7d,\n      segment.active_recipients_7d\n    ) AS average_active_utc_days_per_active_recipient_7d,\n    SAFE_DIVIDE(\n      segment.distinct_target_count_7d,\n      segment.active_recipients_7d\n    ) AS average_distinct_targets_per_active_recipient_7d\n  FROM\n    segment_summary AS segment\n  CROSS JOIN\n    cohort_totals AS cohort\n),\n\ntiming_labeled AS (\n  SELECT\n    CASE\n      WHEN seconds_to_first_activity_7d IS NULL THEN 6\n      WHEN seconds_to_first_activity_7d < 3600 THEN 1\n      WHEN seconds_to_first_activity_7d < 21600 THEN 2\n      WHEN seconds_to_first_activity_7d < 86400 THEN 3\n      WHEN seconds_to_first_activity_7d < 259200 THEN 4\n      WHEN seconds_to_first_activity_7d < 604800 THEN 5\n      ELSE 7\n    END AS bucket_order,\n    CASE\n      WHEN seconds_to_first_activity_7d IS NULL\n        THEN 'No activity within 7d'\n      WHEN seconds_to_first_activity_7d < 3600 THEN 'Within 1 hour'\n      WHEN seconds_to_first_activity_7d < 21600 THEN '1 to <6 hours'\n      WHEN seconds_to_first_activity_7d < 86400 THEN '6 to <24 hours'\n      WHEN seconds_to_first_activity_7d < 259200 THEN '1 to <3 days'\n      WHEN seconds_to_first_activity_7d < 604800 THEN '3 to <7 days'\n      ELSE 'Invalid: outside seven-day window'\n    END AS timing_bucket\n  FROM\n    metrics\n),\n\ntiming_summary AS (\n  SELECT\n    timing.bucket_order,\n    timing.timing_bucket,\n    COUNT(*) AS recipient_count,\n    SAFE_DIVIDE(COUNT(*), cohort.recipient_count) AS recipient_share\n  FROM\n    timing_labeled AS timing\n  CROSS JOIN\n    cohort_totals AS cohort\n  GROUP BY\n    timing.bucket_order,\n    timing.timing_bucket,\n    cohort.recipient_count\n),\n\nintensity_labeled AS (\n  SELECT\n    CASE\n      WHEN successful_transaction_count_7d = 0 THEN 1\n      WHEN successful_transaction_count_7d = 1 THEN 2\n      WHEN successful_transaction_count_7d <= 5 THEN 3\n      WHEN successful_transaction_count_7d <= 10 THEN 4\n      ELSE 5\n    END AS bucket_order,\n    CASE\n      WHEN successful_transaction_count_7d = 0\n        THEN 'No activity within 7d'\n      WHEN successful_transaction_count_7d = 1 THEN '1 transaction'\n      WHEN successful_transaction_count_7d <= 5 THEN '2–5 transactions'\n      WHEN successful_transaction_count_7d <= 10 THEN '6–10 transactions'\n      ELSE '11+ transactions'\n    END AS transaction_count_bucket,\n    successful_transaction_count_7d\n  FROM\n    metrics\n),\n\nintensity_summary AS (\n  SELECT\n    intensity.bucket_order,\n    intensity.transaction_count_bucket,\n    COUNT(*) AS recipient_count,\n    SAFE_DIVIDE(COUNT(*), cohort.recipient_count) AS recipient_share,\n    SUM(successful_transaction_count_7d) AS successful_transaction_rows,\n    SAFE_DIVIDE(\n      SUM(successful_transaction_count_7d),\n      cohort.activity_transaction_rows_7d\n    ) AS successful_transaction_share\n  FROM\n    intensity_labeled AS intensity\n  CROSS JOIN\n    cohort_totals AS cohort\n  GROUP BY\n    intensity.bucket_order,\n    intensity.transaction_count_bucket,\n    cohort.recipient_count,\n    cohort.activity_transaction_rows_7d\n)\n\nSELECT\n  TO_JSON_STRING(STRUCT(\n    '2023-03-23 through 2023-09-24 claim cohort' AS cohort,\n    'Successful top-level Arbitrum transactions initiated by the validated claim recipient after exact claim order'\n      AS activity_definition,\n    'Address activity; not proof of retained human usage, protocol engagement, token retention, or sales'\n      AS interpretation_limit,\n    (\n      SELECT ARRAY_AGG(window_row ORDER BY window_order)\n      FROM window_summary AS window_row\n    ) AS window_summary,\n    (\n      SELECT ARRAY_AGG(segment_row ORDER BY segment_order)\n      FROM segment_chart AS segment_row\n    ) AS claim_size_segments,\n    (\n      SELECT ARRAY_AGG(timing_row ORDER BY bucket_order)\n      FROM timing_summary AS timing_row\n    ) AS first_activity_timing,\n    (\n      SELECT ARRAY_AGG(intensity_row ORDER BY bucket_order)\n      FROM intensity_summary AS intensity_row\n    ) AS activity_intensity_7d\n  )) AS chart_data_json;\n",
+        "tables_used": [
+          "YOUR_PROJECT_ID.YOUR_DATASET_ID.post_claim_activity_metrics_full_cohort"
+        ],
+        "filters": [
+          "All 583,137 validated claim recipients",
+          "Successful top-level Arbitrum transactions initiated after exact claim order",
+          "Half-open elapsed windows of 24 hours and seven days"
+        ],
+        "metric_definitions": [
+          "Active recipient: a claim recipient initiating at least one qualifying transaction in the window.",
+          "Activity intensity: count of qualifying successful top-level transactions within seven days.",
+          "Activity is an address-level signal, not proof of retained human usage or protocol engagement."
+        ]
+      }
+    },
+    {
+      "id": "src_balance_proxy",
+      "label": "Validated 7-day and 30-day transfer-derived ARB balance proxies",
+      "path": "data/retention_arb_balance_proxy_chart_data.json",
+      "query": {
+        "engine": "BigQuery Standard SQL",
+        "language": "GoogleSQL",
+        "executed_at": "2026-08-22",
+        "description": "Profiles the claim-grain transfer-derived ARB balance table. The public chart data and QA files are locally derived, hash-pinned to SHA-256 c20abf421e6177e919a06b0933bdf8149df5c4fc35100f0934c31ec005e8c407 and f28c6dbc75149cead9030fc4816452a8c25fe02819f23d9572bf42cd2d1d09ba.",
+        "sql": "-- Profile and reconcile the claim-grain transfer-derived ARB balance proxy.\n-- Always fresh-dry-run this exact read-only statement before execution.\n--\n-- Output grain:\n--   Exactly one aggregate QA row for the complete validated claim cohort.\n--   The two bucket fields are bounded arrays with one row per bucket.\n--\n-- Source tables and source grain:\n--   retention_transfer_derived_arb_balance_proxy:\n--     one row per validated unique claim recipient.\n--   corrected_claim_transfers_enriched_chunk_01..21:\n--     one validated claim event and unique recipient per row.\n--   retention_arb_claimant_transfer_legs:\n--     one signed claimant endpoint role per\n--     (transaction_hash, log_index, leg_role).\n--\n-- Join keys and expected cardinality:\n--   Source claims LEFT JOIN proxy one-to-one by normalized recipient. The\n--   proxy-to-source reverse coverage is derived from that reconciliation plus\n--   independently profiled row and distinct-key counts. Leg cardinality is\n--   reconciled through aggregate counts, so no leg JOIN can multiply QA rows.\n--\n-- Filters and time boundaries:\n--   Claim suffixes are final numeric chunks 01 through 21. The materialized\n--   proxy already applies exact pre-claim order and cutoff-exclusive 7d/30d\n--   elapsed-time windows; this query validates the stored boundary counters\n--   and formulas but does not redefine the windows.\n--\n-- Row-multiplication risk:\n--   The only row-level JOIN is expected one-to-one by unique recipient.\n--   Duplicate profiles are computed separately before cross-joining scalar\n--   summaries. Bucket arrays contain at most six controlled values.\n\nWITH proxy AS (\n  SELECT *\n  FROM\n    `YOUR_DATASET_ID.retention_transfer_derived_arb_balance_proxy`\n),\n\nsource_claims AS (\n  SELECT\n    chunk_number AS claim_chunk_number,\n    block_timestamp AS claim_timestamp,\n    block_number AS claim_block_number,\n    transaction_hash AS claim_transaction_hash,\n    log_index AS claim_log_index,\n    LOWER(recipient) AS claim_recipient,\n    amount_raw AS claim_amount_raw,\n    source_match_rows AS claim_source_match_rows\n  FROM\n    `YOUR_DATASET_ID.corrected_claim_transfers_enriched_chunk_*`\n  WHERE\n    REGEXP_CONTAINS(_TABLE_SUFFIX, r'^\\d{2}$')\n    AND SAFE_CAST(_TABLE_SUFFIX AS INT64) BETWEEN 1 AND 21\n),\n\nrecipient_key_profile AS (\n  SELECT\n    claim_recipient,\n    COUNT(*) AS rows_on_recipient\n  FROM\n    proxy\n  GROUP BY\n    claim_recipient\n),\n\nrecipient_key_summary AS (\n  SELECT\n    COUNTIF(rows_on_recipient > 1) AS duplicated_recipient_keys,\n    SUM(IF(rows_on_recipient > 1, rows_on_recipient, 0))\n      AS rows_on_duplicated_recipient_keys,\n    SUM(rows_on_recipient - 1) AS extra_rows_above_recipient_grain\n  FROM\n    recipient_key_profile\n),\n\nclaim_event_key_profile AS (\n  SELECT\n    claim_transaction_hash,\n    claim_log_index,\n    COUNT(*) AS rows_on_claim_event\n  FROM\n    proxy\n  GROUP BY\n    claim_transaction_hash,\n    claim_log_index\n),\n\nclaim_event_key_summary AS (\n  SELECT\n    COUNTIF(rows_on_claim_event > 1) AS duplicated_claim_event_keys,\n    SUM(rows_on_claim_event - 1) AS extra_rows_above_claim_event_grain\n  FROM\n    claim_event_key_profile\n),\n\nproxy_summary AS (\n  SELECT\n    COUNT(*) AS proxy_rows,\n    COUNT(DISTINCT claim_recipient) AS distinct_proxy_recipients,\n    COUNT(DISTINCT FORMAT(\n      '%s#%d', claim_transaction_hash, claim_log_index\n    )) AS distinct_proxy_claim_event_keys,\n    COUNTIF(\n      claim_chunk_number IS NULL\n      OR claim_timestamp IS NULL\n      OR claim_block_number IS NULL\n      OR claim_transaction_hash IS NULL\n      OR claim_transaction_index IS NULL\n      OR claim_log_index IS NULL\n      OR claim_recipient IS NULL\n      OR claim_amount_raw IS NULL\n      OR claim_source_match_rows IS NULL\n      OR claim_receipt_timestamp IS NULL\n      OR claim_receipt_block_number IS NULL\n      OR claim_receipt_match_rows IS NULL\n      OR claim_block_match_rows IS NULL\n      OR order_match_rows IS NULL\n      OR all_history_leg_rows IS NULL\n      OR pre_claim_leg_rows IS NULL\n      OR leg_rows_before_7d_cutoff IS NULL\n      OR leg_rows_before_30d_cutoff IS NULL\n      OR pre_claim_arb_balance_raw IS NULL\n      OR transfer_derived_arb_balance_raw_7d IS NULL\n      OR transfer_derived_arb_balance_raw_30d IS NULL\n      OR exact_claim_destination_leg_rows IS NULL\n      OR exact_claim_destination_signed_amount_raw IS NULL\n      OR pre_claim_adjusted_retained_claim_proxy_raw_7d IS NULL\n      OR pre_claim_adjusted_retained_claim_proxy_raw_30d IS NULL\n      OR total_balance_to_claim_ratio_7d IS NULL\n      OR total_balance_to_claim_ratio_30d IS NULL\n      OR pre_claim_adjusted_retained_claim_proxy_ratio_7d IS NULL\n      OR pre_claim_adjusted_retained_claim_proxy_ratio_30d IS NULL\n      OR total_balance_to_claim_bucket_7d IS NULL\n      OR total_balance_to_claim_bucket_30d IS NULL\n    ) AS critical_null_rows,\n    COUNTIF(\n      NOT REGEXP_CONTAINS(claim_recipient, r'^0x[0-9a-f]{40}$')\n    ) AS invalid_recipient_rows,\n    COUNTIF(claim_amount_raw <= 0) AS non_positive_claim_amount_rows,\n    COUNTIF(claim_source_match_rows != 1) AS invalid_claim_source_match_rows,\n    COUNTIF(order_match_rows != 1) AS invalid_order_match_rows,\n    COUNTIF(\n      claim_receipt_match_rows != 1 OR claim_block_match_rows != 1\n    ) AS invalid_order_source_match_rows,\n    COUNTIF(\n      claim_receipt_timestamp != claim_timestamp\n      OR claim_receipt_block_number != claim_block_number\n    ) AS claim_order_metadata_mismatch_rows,\n    COUNTIF(exact_claim_destination_leg_rows != 1)\n      AS invalid_exact_claim_destination_leg_rows,\n    COUNTIF(\n      exact_claim_destination_signed_amount_raw != claim_amount_raw\n    ) AS exact_claim_destination_amount_mismatch_rows,\n    COUNTIF(all_history_leg_rows < 1) AS claims_without_any_leg_rows,\n    COUNTIF(\n      pre_claim_leg_rows > leg_rows_before_7d_cutoff\n      OR leg_rows_before_7d_cutoff > leg_rows_before_30d_cutoff\n      OR leg_rows_before_30d_cutoff > all_history_leg_rows\n    ) AS invalid_leg_count_order_rows,\n    COUNTIF(pre_claim_arb_balance_raw < 0) AS negative_pre_claim_balance_rows,\n    COUNTIF(transfer_derived_arb_balance_raw_7d < 0)\n      AS negative_7d_balance_rows,\n    COUNTIF(transfer_derived_arb_balance_raw_30d < 0)\n      AS negative_30d_balance_rows,\n    COUNTIF(\n      pre_claim_adjusted_retained_claim_proxy_raw_7d < 0\n      OR pre_claim_adjusted_retained_claim_proxy_raw_7d > claim_amount_raw\n    ) AS invalid_adjusted_proxy_bounds_7d_rows,\n    COUNTIF(\n      pre_claim_adjusted_retained_claim_proxy_raw_30d < 0\n      OR pre_claim_adjusted_retained_claim_proxy_raw_30d > claim_amount_raw\n    ) AS invalid_adjusted_proxy_bounds_30d_rows,\n    COUNTIF(\n      pre_claim_adjusted_retained_claim_proxy_raw_7d\n      != LEAST(\n        claim_amount_raw,\n        GREATEST(\n          CAST(0 AS BIGNUMERIC),\n          transfer_derived_arb_balance_raw_7d - pre_claim_arb_balance_raw\n        )\n      )\n    ) AS adjusted_proxy_formula_mismatch_7d_rows,\n    COUNTIF(\n      pre_claim_adjusted_retained_claim_proxy_raw_30d\n      != LEAST(\n        claim_amount_raw,\n        GREATEST(\n          CAST(0 AS BIGNUMERIC),\n          transfer_derived_arb_balance_raw_30d - pre_claim_arb_balance_raw\n        )\n      )\n    ) AS adjusted_proxy_formula_mismatch_30d_rows,\n    COUNTIF(\n      total_balance_to_claim_ratio_7d\n      != SAFE_DIVIDE(transfer_derived_arb_balance_raw_7d, claim_amount_raw)\n      OR pre_claim_adjusted_retained_claim_proxy_ratio_7d\n      != SAFE_DIVIDE(\n        pre_claim_adjusted_retained_claim_proxy_raw_7d, claim_amount_raw\n      )\n    ) AS ratio_formula_mismatch_7d_rows,\n    COUNTIF(\n      total_balance_to_claim_ratio_30d\n      != SAFE_DIVIDE(transfer_derived_arb_balance_raw_30d, claim_amount_raw)\n      OR pre_claim_adjusted_retained_claim_proxy_ratio_30d\n      != SAFE_DIVIDE(\n        pre_claim_adjusted_retained_claim_proxy_raw_30d, claim_amount_raw\n      )\n    ) AS ratio_formula_mismatch_30d_rows,\n    COUNTIF(\n      total_balance_to_claim_bucket_7d NOT IN (\n        '0%', '<25%', '25-75%', '75-100%', '>100%',\n        'invalid: negative balance'\n      )\n    ) AS invalid_bucket_value_7d_rows,\n    COUNTIF(\n      total_balance_to_claim_bucket_30d NOT IN (\n        '0%', '<25%', '25-75%', '75-100%', '>100%',\n        'invalid: negative balance'\n      )\n    ) AS invalid_bucket_value_30d_rows,\n    COUNTIF(\n      total_balance_to_claim_bucket_7d != CASE\n        WHEN transfer_derived_arb_balance_raw_7d < 0\n          THEN 'invalid: negative balance'\n        WHEN transfer_derived_arb_balance_raw_7d = 0 THEN '0%'\n        WHEN transfer_derived_arb_balance_raw_7d < claim_amount_raw / 4\n          THEN '<25%'\n        WHEN transfer_derived_arb_balance_raw_7d < claim_amount_raw * 3 / 4\n          THEN '25-75%'\n        WHEN transfer_derived_arb_balance_raw_7d <= claim_amount_raw\n          THEN '75-100%'\n        ELSE '>100%'\n      END\n    ) AS bucket_rule_mismatch_7d_rows,\n    COUNTIF(\n      total_balance_to_claim_bucket_30d != CASE\n        WHEN transfer_derived_arb_balance_raw_30d < 0\n          THEN 'invalid: negative balance'\n        WHEN transfer_derived_arb_balance_raw_30d = 0 THEN '0%'\n        WHEN transfer_derived_arb_balance_raw_30d < claim_amount_raw / 4\n          THEN '<25%'\n        WHEN transfer_derived_arb_balance_raw_30d < claim_amount_raw * 3 / 4\n          THEN '25-75%'\n        WHEN transfer_derived_arb_balance_raw_30d <= claim_amount_raw\n          THEN '75-100%'\n        ELSE '>100%'\n      END\n    ) AS bucket_rule_mismatch_30d_rows,\n    SUM(claim_amount_raw) AS claimed_amount_raw,\n    SUM(exact_claim_destination_signed_amount_raw)\n      AS exact_claim_destination_amount_raw,\n    SUM(all_history_leg_rows) AS summed_all_history_leg_rows,\n    SUM(pre_claim_leg_rows) AS summed_pre_claim_leg_rows,\n    SUM(leg_rows_before_7d_cutoff) AS summed_leg_rows_before_7d_cutoff,\n    SUM(leg_rows_before_30d_cutoff) AS summed_leg_rows_before_30d_cutoff,\n    SUM(pre_claim_arb_balance_raw) AS summed_pre_claim_balance_raw,\n    SUM(transfer_derived_arb_balance_raw_7d) AS summed_balance_raw_7d,\n    SUM(transfer_derived_arb_balance_raw_30d) AS summed_balance_raw_30d,\n    SUM(pre_claim_adjusted_retained_claim_proxy_raw_7d)\n      AS summed_adjusted_retained_claim_proxy_raw_7d,\n    SUM(pre_claim_adjusted_retained_claim_proxy_raw_30d)\n      AS summed_adjusted_retained_claim_proxy_raw_30d,\n    COUNTIF(pre_claim_arb_balance_raw > 0) AS positive_pre_claim_balance_rows,\n    COUNTIF(pre_claim_arb_balance_raw = 0) AS zero_pre_claim_balance_rows,\n    COUNTIF(transfer_derived_arb_balance_raw_7d = 0) AS zero_balance_7d_rows,\n    COUNTIF(transfer_derived_arb_balance_raw_30d = 0) AS zero_balance_30d_rows,\n    COUNTIF(transfer_derived_arb_balance_raw_7d > claim_amount_raw)\n      AS above_claim_balance_7d_rows,\n    COUNTIF(transfer_derived_arb_balance_raw_30d > claim_amount_raw)\n      AS above_claim_balance_30d_rows\n  FROM\n    proxy\n),\n\nsource_claim_reconciliation AS (\n  SELECT\n    COUNT(*) AS source_claim_rows,\n    COUNT(DISTINCT source.claim_recipient) AS distinct_source_recipients,\n    COUNT(DISTINCT FORMAT(\n      '%s#%d', source.claim_transaction_hash, source.claim_log_index\n    )) AS distinct_source_claim_event_keys,\n    SUM(source.claim_amount_raw) AS source_claimed_amount_raw,\n    COUNTIF(proxy.claim_recipient IS NULL) AS source_claims_missing_proxy,\n    COUNTIF(\n      proxy.claim_recipient IS NOT NULL\n      AND (\n        proxy.claim_chunk_number IS DISTINCT FROM source.claim_chunk_number\n        OR proxy.claim_timestamp IS DISTINCT FROM source.claim_timestamp\n        OR proxy.claim_block_number IS DISTINCT FROM source.claim_block_number\n        OR proxy.claim_transaction_hash\n          IS DISTINCT FROM source.claim_transaction_hash\n        OR proxy.claim_log_index IS DISTINCT FROM source.claim_log_index\n        OR proxy.claim_amount_raw IS DISTINCT FROM source.claim_amount_raw\n        OR proxy.claim_source_match_rows\n          IS DISTINCT FROM source.claim_source_match_rows\n      )\n    ) AS source_to_proxy_field_mismatch_rows\n  FROM\n    source_claims AS source\n  LEFT JOIN\n    proxy\n    USING (claim_recipient)\n),\n\nleg_summary AS (\n  SELECT\n    COUNT(*) AS source_leg_rows,\n    COUNT(DISTINCT claimant_address) AS distinct_source_leg_claimants,\n    COUNT(DISTINCT FORMAT(\n      '%s#%d#%s', transaction_hash, log_index, leg_role\n    )) AS distinct_source_leg_keys,\n    SUM(IF(is_self_transfer, signed_amount_raw, 0))\n      AS self_transfer_net_signed_amount_raw\n  FROM\n    `YOUR_DATASET_ID.retention_arb_claimant_transfer_legs`\n),\n\nbucket_7d AS (\n  SELECT\n    total_balance_to_claim_bucket_7d AS bucket,\n    COUNT(*) AS recipient_rows,\n    SAFE_DIVIDE(COUNT(*), (SELECT COUNT(*) FROM proxy)) AS recipient_share\n  FROM\n    proxy\n  GROUP BY\n    bucket\n),\n\nbucket_30d AS (\n  SELECT\n    total_balance_to_claim_bucket_30d AS bucket,\n    COUNT(*) AS recipient_rows,\n    SAFE_DIVIDE(COUNT(*), (SELECT COUNT(*) FROM proxy)) AS recipient_share\n  FROM\n    proxy\n  GROUP BY\n    bucket\n)\n\nSELECT\n  proxy_metrics.*,\n  recipient_keys.*,\n  claim_event_keys.*,\n  source_reconciliation.*,\n  leg_metrics.*,\n  proxy_metrics.proxy_rows - source_reconciliation.source_claim_rows\n    + source_reconciliation.source_claims_missing_proxy\n    AS proxy_rows_without_source_claim,\n  proxy_metrics.summed_all_history_leg_rows - leg_metrics.source_leg_rows\n    AS leg_row_reconciliation_difference,\n  proxy_metrics.claimed_amount_raw\n    - source_reconciliation.source_claimed_amount_raw\n    AS claim_amount_reconciliation_difference_raw,\n  proxy_metrics.exact_claim_destination_amount_raw\n    - proxy_metrics.claimed_amount_raw\n    AS exact_claim_destination_difference_raw,\n  ARRAY(\n    SELECT AS STRUCT bucket, recipient_rows, recipient_share\n    FROM bucket_7d\n    ORDER BY CASE bucket\n      WHEN '0%' THEN 1\n      WHEN '<25%' THEN 2\n      WHEN '25-75%' THEN 3\n      WHEN '75-100%' THEN 4\n      WHEN '>100%' THEN 5\n      ELSE 6\n    END\n  ) AS total_balance_to_claim_buckets_7d,\n  ARRAY(\n    SELECT AS STRUCT bucket, recipient_rows, recipient_share\n    FROM bucket_30d\n    ORDER BY CASE bucket\n      WHEN '0%' THEN 1\n      WHEN '<25%' THEN 2\n      WHEN '25-75%' THEN 3\n      WHEN '75-100%' THEN 4\n      WHEN '>100%' THEN 5\n      ELSE 6\n    END\n  ) AS total_balance_to_claim_buckets_30d\nFROM\n  proxy_summary AS proxy_metrics\nCROSS JOIN\n  recipient_key_summary AS recipient_keys\nCROSS JOIN\n  claim_event_key_summary AS claim_event_keys\nCROSS JOIN\n  source_claim_reconciliation AS source_reconciliation\nCROSS JOIN\n  leg_summary AS leg_metrics;\n",
+        "tables_used": [
+          "YOUR_PROJECT_ID.YOUR_DATASET_ID.retention_transfer_derived_arb_balance_proxy",
+          "YOUR_PROJECT_ID.YOUR_DATASET_ID.retention_arb_claimant_transfer_legs",
+          "YOUR_PROJECT_ID.YOUR_DATASET_ID.corrected_claim_transfers_enriched_chunk_*"
+        ],
+        "filters": [
+          "All 583,137 validated unique claim recipients",
+          "Signed ARB transfer legs strictly before exact 7-day and 30-day elapsed cutoffs",
+          "Pre-claim balance uses exact block, transaction, and log ordering",
+          "Claimant self-transfers net to zero"
+        ],
+        "metric_definitions": [
+          "Total-balance ratio: transfer-derived total ARB balance at the cutoff divided by validated claim amount.",
+          "Adjusted retained-claim proxy: total balance minus positive pre-claim balance, capped to [0, claim amount] per recipient before aggregation.",
+          "The proxy does not trace fungible claimed units and is not a historical balance snapshot."
+        ]
+      }
+    }
+  ],
+  "package_info": {
+    "author": "Nikita Onchain",
+    "report_role": "Public technical portfolio case study"
+  }
+}

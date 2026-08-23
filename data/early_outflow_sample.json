@@ -1,0 +1,50 @@
+{
+  "generated_at": "2026-08-13",
+  "status": "methodology_sample_only",
+  "claim": {
+    "transaction_hash": "0x324f2ef46287a4f51a70e2a17ecd9a68af8f4c94c1eed0da16fa1e20992cb15a",
+    "recipient": "0x27a1b27b2e8bfdd57a3049415dcf6a63ac11667f",
+    "claim_timestamp_utc": "2023-03-23 13:01:22",
+    "claim_amount_raw": "1625000000000000000000",
+    "claim_amount_arb": "1625"
+  },
+  "window": {
+    "definition": "strictly after claim timestamp through 24 hours after claim, inclusive",
+    "start_exclusive_utc": "2023-03-23 13:01:22",
+    "end_inclusive_utc": "2023-03-24 13:01:22"
+  },
+  "dry_run_upper_bound_bytes": "1922634785",
+  "candidate_transfer_event_rows": 4,
+  "zero_value_transfer_event_rows": 2,
+  "positive_outflow_event_rows": 2,
+  "positive_outflow_transactions": 2,
+  "duplicated_event_keys": 0,
+  "critical_null_key_rows": 0,
+  "invalid_or_null_value_rows": 0,
+  "first_positive_outflow_timestamp_utc": "2023-03-23 14:12:53",
+  "seconds_to_first_positive_outflow": 4291,
+  "positive_outflows": [
+    {
+      "transaction_hash": "0x447f74fd6a5668ed528d3dc18a43b5adf88be74a3c73ba40945c976c5c898f16",
+      "timestamp_utc": "2023-03-23 14:12:53",
+      "destination": "0x64768a3a2453f1e8de9e43e92d65fc36e4c9872d",
+      "amount_raw": "10000000000000000000",
+      "amount_arb": "10",
+      "destination_classification": "unclassified"
+    },
+    {
+      "transaction_hash": "0x6fb0c801be0ab609d8fe3ea1f4cde7fe41009297ff3beb89be27714b0b48a5fe",
+      "timestamp_utc": "2023-03-23 15:49:41",
+      "destination": "0x1e02f86722800c703262d681dc7639b875c168f4",
+      "amount_raw": "1615000000000000000000",
+      "amount_arb": "1615",
+      "destination_classification": "unclassified"
+    }
+  ],
+  "gross_positive_outflow_raw": "1625000000000000000000",
+  "gross_positive_outflow_arb": "1625",
+  "capped_claim_linked_outflow_raw": "1625000000000000000000",
+  "capped_claim_linked_outflow_arb": "1625",
+  "capped_claim_linked_outflow_ratio": "1",
+  "interpretation": "The sample shows full positive ARB outflow within 24 hours. It does not establish a sale or classify either destination."
+}

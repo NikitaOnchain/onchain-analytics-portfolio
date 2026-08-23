@@ -1,0 +1,61 @@
+{
+  "checkpoint_date": "2026-08-20",
+  "status": "validated",
+  "sql_file": "../sql/79_validate_first_arb_transfer_decoded_vs_raw.sql",
+  "execution": {
+    "fresh_dry_run_bytes": 4468764547,
+    "maximum_bytes_billed": 10737418240,
+    "billing_changed": false,
+    "statement_type": "SELECT",
+    "data_producing_statement_executed": false,
+    "execution_path": "local_bq_cli_using_existing_application_default_credentials_after_mcp_tls_timeouts"
+  },
+  "qa_summary": {
+    "joined_event_rows": 1,
+    "decoded_match_defect_rows": 0,
+    "raw_match_defect_rows": 0,
+    "critical_null_rows": 0,
+    "timestamp_mismatch_rows": 0,
+    "block_number_mismatch_rows": 0,
+    "transaction_index_mismatch_rows": 0,
+    "event_topic_mismatch_rows": 0,
+    "sender_mismatch_rows": 0,
+    "destination_mismatch_rows": 0,
+    "amount_mismatch_rows": 0
+  },
+  "validated_event": {
+    "block_timestamp_utc": "2023-03-16 12:08:28",
+    "block_number": 70398215,
+    "transaction_hash": "0x9cdbb4672b549c26d97cac29f9cd73c1951656e0622ba4b9ed0abff2ee58698d",
+    "transaction_index": 1,
+    "log_index": 19,
+    "event_signature": "Transfer(address,address,uint256)",
+    "event_topic0": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef",
+    "sender": "0x0000000000000000000000000000000000000000",
+    "destination": "0x2b9acfd85440b7828db8e54694ee07b2b056b30c",
+    "amount_raw": "10000000000000000000000000000",
+    "amount_arb": "10000000000",
+    "decoded_match_rows": 1,
+    "raw_match_rows": 1
+  },
+  "independent_explorer_evidence": {
+    "source": "Arbiscan transaction page",
+    "url": "https://arbiscan.io/tx/0x9cdbb4672b549c26d97cac29f9cd73c1951656e0622ba4b9ed0abff2ee58698d",
+    "access_date": "2026-08-20",
+    "transaction_status": "Success",
+    "reported_block_number": 70398215,
+    "reported_timestamp_utc": "2023-03-16 12:08:28",
+    "arb_token_reported_created_in_transaction": true,
+    "reported_transfer_sender": "zero_address",
+    "reported_transfer_destination": "Arbitrum Foundation: Deployer",
+    "reported_transfer_amount_arb": "10000000000"
+  },
+  "boundary_conclusion": {
+    "full_transfer_history_start_validated": true,
+    "reason": "The bounded decoded-event probes found no earlier positive ARB Transfer in [2023-03-01, 2023-03-16), SQL 79 reconciled the first observed decoded event exactly to its raw log, and Arbiscan independently reports that the ARB token contract was created and the 10 billion ARB zero-address mint occurred in that same successful transaction.",
+    "safe_source_coverage_start_utc": "2023-03-16 12:08:28",
+    "sql_78_interval_includes_boundary": true,
+    "sql_78_execution_authorized_after_fresh_dry_run": true
+  },
+  "next_step": "Fresh-dry-run the unchanged SQL 78 immediately before execution, materialize only transfer source chunk 01 if the estimate remains at or below 8 GiB, then run a separate event-grain structural profile before proceeding."
+}

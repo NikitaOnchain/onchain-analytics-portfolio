@@ -1,0 +1,76 @@
+{
+  "checkpoint_date": "2026-08-20",
+  "status": "bounded_probe_passed_full_history_start_not_yet_validated",
+  "token": {
+    "chain": "Arbitrum One",
+    "symbol": "ARB",
+    "contract_address": "0x912ce59144191c1204e64559fe8253a0e49e6548",
+    "decimals": 18,
+    "explorer_url": "https://arbiscan.io/token/0x912ce59144191c1204e64559fe8253a0e49e6548",
+    "access_date": "2026-08-20"
+  },
+  "execution": {
+    "billing_changed": false,
+    "maximum_bytes_billed": 10737418240,
+    "execution_fallback": "local_bq_cli_using_existing_application_default_credentials_after_three_mcp_tls_timeouts",
+    "data_producing_statement_executed": false
+  },
+  "probes": [
+    {
+      "sql_file": "../sql/77_probe_arb_contract_creation_boundary.sql",
+      "interval_utc": "[2023-03-01, 2023-03-23)",
+      "dry_run_bytes": 3699539244,
+      "creation_candidate_rows": 0,
+      "non_unique_candidate_rows": 0,
+      "first_creation_candidate": null
+    },
+    {
+      "sql_file": "../sql/77a_probe_arb_transfer_boundary_01.sql",
+      "interval_utc": "[2023-03-01, 2023-03-08)",
+      "dry_run_bytes": 4047034672,
+      "positive_transfer_rows": 0,
+      "non_unique_positive_transfer_rows": 0,
+      "invalid_or_null_amount_rows": 0,
+      "first_positive_transfer": null
+    },
+    {
+      "sql_file": "../sql/77b_probe_arb_transfer_boundary_02.sql",
+      "interval_utc": "[2023-03-08, 2023-03-16)",
+      "dry_run_bytes": 5358680157,
+      "positive_transfer_rows": 0,
+      "non_unique_positive_transfer_rows": 0,
+      "invalid_or_null_amount_rows": 0,
+      "first_positive_transfer": null
+    },
+    {
+      "sql_file": "../sql/77c_probe_arb_transfer_boundary_03.sql",
+      "interval_utc": "[2023-03-16, 2023-03-23)",
+      "dry_run_bytes": 6657311568,
+      "positive_transfer_rows": 61,
+      "non_unique_positive_transfer_rows": 0,
+      "invalid_or_null_amount_rows": 0,
+      "first_positive_transfer": {
+        "block_timestamp_utc": "2023-03-16 12:08:28",
+        "block_number": 70398215,
+        "transaction_hash": "0x9cdbb4672b549c26d97cac29f9cd73c1951656e0622ba4b9ed0abff2ee58698d",
+        "transaction_index": 1,
+        "log_index": 19,
+        "source_match_rows": 1,
+        "amount_raw": "10000000000000000000000000000",
+        "amount_arb": "10000000000",
+        "explorer_url": "https://arbiscan.io/tx/0x9cdbb4672b549c26d97cac29f9cd73c1951656e0622ba4b9ed0abff2ee58698d#eventlog"
+      }
+    }
+  ],
+  "qa": {
+    "non_overlapping_transfer_intervals": true,
+    "covered_transfer_interval_utc": "[2023-03-01, 2023-03-23)",
+    "positive_decoded_transfers_before_2023_03_16_in_covered_interval": 0,
+    "first_observed_positive_transfer_unique_at_event_grain": true,
+    "top_level_creation_receipt_found_in_covered_interval": false,
+    "full_history_start_validated": false,
+    "ctas_78_execution_authorized": false
+  },
+  "limitation": "The bounded probes do not exclude token activity before 2023-03-01. The receipts contract_address field also does not prove internal CREATE or CREATE2 deployment. The exact first observed event still requires decoded-address and raw-log validation before the transfer-source coverage boundary can be promoted.",
+  "next_step": "Validate the exact first observed decoded Transfer against its raw log, including sender, destination, topic signature, amount, and event ordering; obtain independent explorer or authoritative deployment evidence before authorizing SQL 78."
+}

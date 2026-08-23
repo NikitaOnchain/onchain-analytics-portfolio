@@ -1,0 +1,39 @@
+{
+  "checkpoint_date": "2026-08-20",
+  "status": "passed",
+  "sql_file": "../sql/81_reconcile_claimant_arb_transfer_source_chunk_01.sql",
+  "target_table": "YOUR_DATASET_ID.retention_arb_transfer_source_chunk_01",
+  "reconciliation_grain": ["transaction_hash", "log_index"],
+  "interval_utc": "[2023-03-16, 2023-03-23)",
+  "fresh_dry_run_bytes": 6552793786,
+  "maximum_bytes_billed": 10737418240,
+  "billing_changed": false,
+  "result": {
+    "expected_event_rows": 16,
+    "materialized_event_rows": 16,
+    "reconciled_event_keys": 16,
+    "missing_materialized_event_rows": 0,
+    "unexpected_materialized_event_rows": 0,
+    "expected_source_match_defect_rows": 0,
+    "materialized_source_match_defect_rows": 0,
+    "materialized_key_defect_rows": 0,
+    "source_chunk_number_mismatch_rows": 0,
+    "timestamp_mismatch_rows": 0,
+    "block_number_mismatch_rows": 0,
+    "transaction_index_mismatch_rows": 0,
+    "sender_mismatch_rows": 0,
+    "destination_mismatch_rows": 0,
+    "amount_mismatch_rows": 0,
+    "expected_amount_raw": "191797960000000000000",
+    "materialized_amount_raw": "191797960000000000000"
+  },
+  "assessment": {
+    "two_way_key_coverage": "pass",
+    "field_consistency": "pass",
+    "aggregate_reconciliation": "pass",
+    "source_cardinality": "pass",
+    "wallet_sample": "pending",
+    "analysis_ready": false
+  },
+  "next_step": "Inspect the deterministic five-event inbound/outbound sample from SQL 82, including claim metadata and explorer links, before promoting chunk 01 or scaling the build."
+}

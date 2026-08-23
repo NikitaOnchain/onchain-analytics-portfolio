@@ -1,0 +1,16 @@
+[
+  {
+    "claim_event_rows": "583137",
+    "distinct_claim_transactions": "583131",
+    "distinct_recipients": "583137",
+    "recipients_with_multiple_claim_events": "0",
+    "extra_event_rows_above_one_per_recipient": "0",
+    "null_transaction_hash_rows": "0",
+    "invalid_or_null_recipient_rows": "0",
+    "invalid_or_null_amount_rows": "0",
+    "first_claim_timestamp": "2023-03-23 13:01:22.000000 UTC",
+    "last_claim_timestamp": "2023-09-24 20:12:52.000000 UTC",
+    "provisional_total_claimed_raw": "1092811500000000000000000000",
+    "provisional_total_claimed_arb": "1092811500"
+  }
+]

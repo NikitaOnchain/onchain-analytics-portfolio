@@ -1,0 +1,176 @@
+{
+  "generated_at": "2026-08-15",
+  "source_query": "sql/50_export_early_outflow_chart_data.sql",
+  "dry_run_bytes": 106620200,
+  "cohort": "2023-03-23 through 2023-09-24 claim cohort",
+  "outflow_definition": "Positive non-self ARB transfers; not classified as sales",
+  "claim_linked_outflow_definition": "Capped at each claim amount; proxy because ARB is fungible",
+  "claim_size_segment_policy": {
+    "method": "Observed approximate cohort quartile boundaries",
+    "profile_query": "sql/49_profile_chart_dimensions.sql",
+    "cutpoints_arb": [875, 1250, 2250],
+    "observed_distinct_claim_amounts": 39,
+    "observed_minimum_claim_amount_arb": 625,
+    "observed_maximum_claim_amount_arb": 10250
+  },
+  "window_summary": [
+    {
+      "window_order": 1,
+      "window_label": "Within 24 hours",
+      "recipient_count": 583137,
+      "recipients_with_positive_outflow": 459437,
+      "recipients_without_positive_outflow": 123700,
+      "recipient_positive_outflow_rate": 0.7878714607373567,
+      "recipient_no_positive_outflow_rate": 0.21212853926264325,
+      "claimed_arb": 1092811500,
+      "gross_positive_outflow_arb": "963790977.728862120206425733",
+      "claim_linked_outflow_arb": "798229705.906067898468974092",
+      "claim_linked_outflow_share": "0.73043677331915696208264105200210649321",
+      "retained_claim_proxy_arb": "294581794.093932101531025908",
+      "retained_claim_proxy_share": "0.26956322668084303791735894799789350679"
+    },
+    {
+      "window_order": 2,
+      "window_label": "Within 7 days",
+      "recipient_count": 583137,
+      "recipients_with_positive_outflow": 498511,
+      "recipients_without_positive_outflow": 84626,
+      "recipient_positive_outflow_rate": 0.85487801322845236,
+      "recipient_no_positive_outflow_rate": 0.14512198677154767,
+      "claimed_arb": 1092811500,
+      "gross_positive_outflow_arb": "1325201504.482288875798676385",
+      "claim_linked_outflow_arb": "878245366.362363087116052122",
+      "claim_linked_outflow_share": "0.80365677553938907772845739818806811605",
+      "retained_claim_proxy_arb": "214566133.637636912883947878",
+      "retained_claim_proxy_share": "0.19634322446061092227154260181193188395"
+    }
+  ],
+  "claim_size_segments": [
+    {
+      "segment_order": 1,
+      "claim_size_segment": "625–875 ARB",
+      "minimum_claim_amount_arb": 625,
+      "maximum_claim_amount_arb": 875,
+      "recipient_count": 187754,
+      "recipient_share": 0.32197236669942053,
+      "claimed_arb": 140067500,
+      "claimed_share": "0.12817169292233839047264784457337793389",
+      "recipients_with_positive_outflow_24h": 150538,
+      "recipient_positive_outflow_rate_24h": 0.8017831843795605,
+      "gross_positive_outflow_arb_24h": "123438976.838355994842327312",
+      "claim_linked_outflow_arb_24h": "109712180.670013718470036129",
+      "claim_linked_outflow_share_24h": "0.78328078012396679079755210166526853124",
+      "retained_claim_proxy_share_24h": "0.21671921987603320920244789833473146876",
+      "recipients_with_positive_outflow_7d": 161584,
+      "recipient_positive_outflow_rate_7d": 0.8606154862213322,
+      "gross_positive_outflow_arb_7d": "147086783.396794917081243691",
+      "claim_linked_outflow_arb_7d": "117773370.429666972529387856",
+      "claim_linked_outflow_share_7d": "0.84083295860686435132623810662716190408",
+      "retained_claim_proxy_share_7d": "0.15916704139313564867376189337283809592"
+    },
+    {
+      "segment_order": 2,
+      "claim_size_segment": "1,125–1,250 ARB",
+      "minimum_claim_amount_arb": 1125,
+      "maximum_claim_amount_arb": 1250,
+      "recipient_count": 112803,
+      "recipient_share": 0.1934416783706059,
+      "claimed_arb": 132374625,
+      "claimed_share": "0.12113216689246041060146237480114365561",
+      "recipients_with_positive_outflow_24h": 88150,
+      "recipient_positive_outflow_rate_24h": 0.7814508479384413,
+      "gross_positive_outflow_arb_24h": "110441180.261307150814943814",
+      "claim_linked_outflow_arb_24h": "100042215.345016047893285098",
+      "claim_linked_outflow_share_24h": "0.75575069878397047691946321283251982772",
+      "retained_claim_proxy_share_24h": "0.24424930121602952308053678716748017228",
+      "recipients_with_positive_outflow_7d": 96149,
+      "recipient_positive_outflow_rate_7d": 0.852362082568726,
+      "gross_positive_outflow_arb_7d": "134840760.6788558974670899",
+      "claim_linked_outflow_arb_7d": "109132704.335828502672420072",
+      "claim_linked_outflow_share_7d": "0.82442314254585048057677271607001719552",
+      "retained_claim_proxy_share_7d": "0.17557685745414951942322728392998280448"
+    },
+    {
+      "segment_order": 3,
+      "claim_size_segment": "1,500–2,250 ARB",
+      "minimum_claim_amount_arb": 1500,
+      "maximum_claim_amount_arb": 2250,
+      "recipient_count": 156942,
+      "recipient_share": 0.2691340113901193,
+      "claimed_arb": 287430375,
+      "claimed_share": "0.26301917119283609295839218383042272158",
+      "recipients_with_positive_outflow_24h": 125261,
+      "recipient_positive_outflow_rate_24h": 0.7981356169795211,
+      "gross_positive_outflow_arb_24h": "258987931.207397284500687671",
+      "claim_linked_outflow_arb_24h": "219706588.816550529532616085",
+      "claim_linked_outflow_share_24h": "0.76438194403270889352809731748079861079",
+      "retained_claim_proxy_share_24h": "0.23561805596729110647190268251920138921",
+      "recipients_with_positive_outflow_7d": 135492,
+      "recipient_positive_outflow_rate_7d": 0.8633253048897045,
+      "gross_positive_outflow_arb_7d": "340778059.398234466870293592",
+      "claim_linked_outflow_arb_7d": "238163308.820300484782369741",
+      "claim_linked_outflow_share_7d": "0.82859478167643376168009293033138894941",
+      "retained_claim_proxy_share_7d": "0.17140521832356623831990706966861105059"
+    },
+    {
+      "segment_order": 4,
+      "claim_size_segment": "2,500–10,250 ARB",
+      "minimum_claim_amount_arb": 2500,
+      "maximum_claim_amount_arb": 10250,
+      "recipient_count": 125638,
+      "recipient_share": 0.21545194353985428,
+      "claimed_arb": 532939000,
+      "claimed_share": "0.48767696899236510596749759679505568893",
+      "recipients_with_positive_outflow_24h": 95488,
+      "recipient_positive_outflow_rate_24h": 0.7600248332510865,
+      "gross_positive_outflow_arb_24h": "470922889.421801690048466936",
+      "claim_linked_outflow_arb_24h": "368768721.07448760257303678",
+      "claim_linked_outflow_share_24h": "0.69195296473796738946302818896721763654",
+      "retained_claim_proxy_share_24h": "0.30804703526203261053697181103278236346",
+      "recipients_with_positive_outflow_7d": 105286,
+      "recipient_positive_outflow_rate_7d": 0.8380107929129722,
+      "gross_positive_outflow_arb_7d": "702495901.008403594380049202",
+      "claim_linked_outflow_arb_7d": "413175982.776567127131874453",
+      "claim_linked_outflow_share_7d": "0.77527818901706785791971398790480711676",
+      "retained_claim_proxy_share_7d": "0.22472181098293214208028601209519288324"
+    }
+  ],
+  "first_positive_outflow_timing": [
+    {
+      "bucket_order": 1,
+      "timing_bucket": "Within 1 hour",
+      "recipient_count": 354666,
+      "recipient_share": 0.6082035610842735
+    },
+    {
+      "bucket_order": 2,
+      "timing_bucket": "1 to <6 hours",
+      "recipient_count": 73038,
+      "recipient_share": 0.1252501556238071
+    },
+    {
+      "bucket_order": 3,
+      "timing_bucket": "6 to <24 hours",
+      "recipient_count": 31733,
+      "recipient_share": 0.05441774402927614
+    },
+    {
+      "bucket_order": 4,
+      "timing_bucket": "1 to <3 days",
+      "recipient_count": 19428,
+      "recipient_share": 0.03331635619074077
+    },
+    {
+      "bucket_order": 5,
+      "timing_bucket": "3 to <7 days",
+      "recipient_count": 19646,
+      "recipient_share": 0.0336901963003548
+    },
+    {
+      "bucket_order": 6,
+      "timing_bucket": "No positive outflow within 7d",
+      "recipient_count": 84626,
+      "recipient_share": 0.14512198677154767
+    }
+  ]
+}

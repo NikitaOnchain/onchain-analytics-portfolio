@@ -1,0 +1,103 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-23",
+  "status": "qa_passed",
+  "chart_data": "data/retention_arb_balance_proxy_chart_data.json",
+  "intended_use": "Public v1 figures, README, and report inputs for the validated transfer-derived ARB balance proxy.",
+  "source_evidence": [
+    {
+      "path": "data/retention_transfer_derived_arb_balance_proxy_profile.json",
+      "expected_sha256": "5512bfe245f288375dc35228132522978b4be637554ead46ad4a29d3f8c3d453",
+      "actual_sha256": "5512bfe245f288375dc35228132522978b4be637554ead46ad4a29d3f8c3d453",
+      "hash_match": true
+    }
+  ],
+  "expected": {
+    "claim_recipients_per_cutoff": 583137,
+    "cutoff_count": 2,
+    "bucket_count_per_cutoff": 5,
+    "bucket_order": [
+      "0%",
+      "<25%",
+      "25-75%",
+      "75-100%",
+      ">100%"
+    ]
+  },
+  "profile": {
+    "bucket_rows": 10,
+    "distinct_cutoff_bucket_keys": 10,
+    "duplicate_cutoff_bucket_keys": 0,
+    "null_critical_field_rows": 0,
+    "negative_recipient_count_rows": 0,
+    "out_of_range_recipient_share_rows": 0,
+    "adjusted_proxy_rows": 2,
+    "distinct_adjusted_proxy_cutoffs": 2,
+    "negative_adjusted_proxy_rows": 0,
+    "out_of_range_adjusted_proxy_share_rows": 0
+  },
+  "cutoff_reconciliation": [
+    {
+      "cutoff_days": 7,
+      "bucket_rows": 5,
+      "recipient_count_sum": 583137,
+      "expected_recipient_count": 583137,
+      "recipient_count_difference": 0,
+      "recipient_share_sum": 0.9999999999999999,
+      "recipient_share_sum_absolute_error": 1.1102230246251565e-16,
+      "maximum_recipient_share_difference_vs_profile": 0,
+      "bucket_count_mismatches_vs_profile": 0,
+      "adjusted_proxy_arb_difference_vs_profile": "0",
+      "adjusted_proxy_share_difference_vs_profile": 0
+    },
+    {
+      "cutoff_days": 30,
+      "bucket_rows": 5,
+      "recipient_count_sum": 583137,
+      "expected_recipient_count": 583137,
+      "recipient_count_difference": 0,
+      "recipient_share_sum": 1.0,
+      "recipient_share_sum_absolute_error": 0,
+      "maximum_recipient_share_difference_vs_profile": 0,
+      "bucket_count_mismatches_vs_profile": 0,
+      "adjusted_proxy_arb_difference_vs_profile": "0",
+      "adjusted_proxy_share_difference_vs_profile": 0
+    }
+  ],
+  "defect_counters": {
+    "source_hash_mismatches": 0,
+    "unexpected_bucket_rows": 0,
+    "duplicate_grain_rows": 0,
+    "critical_null_rows": 0,
+    "invalid_domain_rows": 0,
+    "recipient_count_reconciliation_failures": 0,
+    "share_sum_failures_at_tolerance_1e_12": 0,
+    "bucket_order_failures": 0,
+    "validated_profile_count_mismatches": 0,
+    "profile_share_mismatches": 0,
+    "adjusted_proxy_mismatches": 0,
+    "symmetric_artifacts_used": 0
+  },
+  "checks": {
+    "source_hashes_match": true,
+    "grain_is_unique": true,
+    "critical_fields_complete": true,
+    "bucket_domain_valid": true,
+    "bucket_order_stable": true,
+    "buckets_mutually_exclusive_and_exhaustive": true,
+    "recipient_counts_reconcile_to_583137_for_each_cutoff": true,
+    "recipient_shares_sum_to_one_within_1e_12": true,
+    "bucket_counts_match_validated_profile": true,
+    "bucket_shares_match_validated_profile": true,
+    "adjusted_proxy_values_match_validated_profile": true,
+    "no_symmetric_pipeline_input_used": true,
+    "safe_for_public_v1_charting": true
+  },
+  "external_operations": {
+    "bigquery": 0,
+    "rpc": 0,
+    "metadata_network": 0,
+    "execute_or_resume": 0
+  },
+  "interpretation_guardrail": "QA validates the local chart-data derivation and reconciliation only. It does not upgrade the metric from a transfer-derived proxy to exact claimed-unit retention, address activity, protocol engagement, human retention, or proof of sale."
+}

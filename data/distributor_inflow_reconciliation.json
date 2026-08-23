@@ -1,0 +1,94 @@
+{
+  "generated_at": "2026-08-13",
+  "source_table": "bigquery-public-data.goog_blockchain_arbitrum_one_us.decoded_events",
+  "source_grain": "one decoded event log per row",
+  "event_key": ["transaction_hash", "log_index"],
+  "initial_funding": {
+    "interval_start_utc": "2023-03-16 00:00:00",
+    "interval_end_utc": "2023-03-23 13:01:22",
+    "dry_run_upper_bound_bytes": "6696010239",
+    "inbound_event_rows": 11,
+    "positive_inbound_event_rows": 1,
+    "zero_value_inbound_event_rows": 10,
+    "duplicated_event_keys": 0,
+    "critical_null_key_rows": 0,
+    "invalid_or_null_amount_rows": 0,
+    "positive_funding_transaction_hash": "0x62c2c34187fde29352b58edd37b0e69f7a6b7ab34699dca957f88229b501ce7c",
+    "positive_funding_timestamp_utc": "2023-03-16 19:37:16",
+    "positive_funding_raw": "1162166000000000000000000000",
+    "positive_funding_arb": "1162166000"
+  },
+  "positive_return_inflows": {
+    "interval_start_utc": "2023-03-23 13:01:22",
+    "interval_end_utc": "2023-09-25 02:20:04",
+    "effective_interval_count": 22,
+    "positive_inbound_event_rows": 71,
+    "positive_inbound_transactions": 71,
+    "positive_inbound_senders_within_each_nonzero_interval": 71,
+    "duplicated_event_keys": 0,
+    "critical_null_key_rows": 0,
+    "invalid_or_null_amount_rows": 0,
+    "positive_inbound_raw": "93885458006064728014866",
+    "positive_inbound_arb": "93885.458006064728014866",
+    "nonzero_intervals": [
+      {
+        "interval_start_utc": "2023-03-23 13:01:22",
+        "interval_end_utc": "2023-03-27 00:00:00",
+        "dry_run_upper_bound_bytes": "4297932018",
+        "positive_inbound_event_rows": 67,
+        "positive_inbound_raw": "93721352181150000000000",
+        "positive_inbound_arb": "93721.35218115"
+      },
+      {
+        "interval_start_utc": "2023-03-27 00:00:00",
+        "interval_end_utc": "2023-04-01 00:00:00",
+        "dry_run_upper_bound_bytes": "4785372151",
+        "positive_inbound_event_rows": 2,
+        "positive_inbound_raw": "63105824914728014866",
+        "positive_inbound_arb": "63.105824914728014866"
+      },
+      {
+        "interval_start_utc": "2023-04-22 00:00:00",
+        "interval_end_utc": "2023-04-25 00:00:00",
+        "dry_run_upper_bound_bytes": "3939149835",
+        "positive_inbound_event_rows": 1,
+        "positive_inbound_raw": "1000000000000000000",
+        "positive_inbound_arb": "1"
+      },
+      {
+        "interval_start_utc": "2023-06-01 00:00:00",
+        "interval_end_utc": "2023-06-16 00:00:00",
+        "dry_run_upper_bound_bytes": "8511515874",
+        "positive_inbound_event_rows": 1,
+        "positive_inbound_raw": "100000000000000000000",
+        "positive_inbound_arb": "100"
+      }
+    ],
+    "zero_positive_inflow_intervals": 18,
+    "largest_fresh_dry_run_upper_bound_bytes": "8511515874",
+    "planning_target_bytes": "8589934592",
+    "hard_limit_bytes": "10737418240"
+  },
+  "final_sweep": {
+    "transaction_hash": "0xa2477f2f1d7824501520a88b50835ad283e7472e0fa5e67005452528bf740175",
+    "timestamp_utc": "2023-09-25 02:20:03",
+    "amount_raw": "69448385458006064728014866",
+    "amount_arb": "69448385.458006064728014866",
+    "classification": "unclaimed_token_sweep_to_configured_sweep_receiver"
+  },
+  "balance_equation": {
+    "formula": "initial_funding + positive_return_inflows - final_sweep",
+    "balance_derived_claimed_raw": "1092811500000000000000000000",
+    "balance_derived_claimed_arb": "1092811500",
+    "raw_claim_profile_arb": "1092811500",
+    "unclaimed_funded_allocation_raw": "69354500000000000000000000",
+    "unclaimed_funded_allocation_arb": "69354500",
+    "funded_allocation_claim_rate": "0.94032306916567856915449255958271021524",
+    "exact_balance_match": true
+  },
+  "public_reference_search": {
+    "exact_published_value_found": false,
+    "approximate_reference": "A community RFC stated that 94 percent of approximately 1.162 billion user-airdrop ARB was claimed.",
+    "assessment": "The 94.0323069166 percent onchain claim rate is consistent with the public approximation, but the exact-value check is an alternate onchain balance derivation rather than a fully source-independent published total."
+  }
+}

@@ -1,0 +1,186 @@
+{
+  "generated_at": "2026-08-16",
+  "status": "planning_snapshot_execution_completed_and_compacted",
+  "scope": "Successful Arbitrum transactions that were initiated by a validated claim recipient or are an exact validated claim transaction; address activity, not proof of retained human usage, protocol engagement, token retention, or sales.",
+  "coverage_start_utc": "2023-03-23 00:00:00",
+  "coverage_end_utc": "2023-10-02 00:00:00",
+  "interval_semantics": "24 non-overlapping half-open UTC intervals",
+  "planning_limit_bytes": "8589934592",
+  "materialization_template": "sql/62_materialize_post_claim_transaction_source_chunk.sql",
+  "chunk_profile_template": "sql/63_profile_post_claim_transaction_source_chunk.sql",
+  "global_profile_query": "sql/64_profile_all_post_claim_transaction_source_chunks.sql",
+  "all_planning_dry_runs_below_limit": true,
+  "maximum_planning_dry_run_bytes": "4797691144",
+  "total_planning_dry_run_bytes": "67043825036",
+  "execution_outcome": "All planned source intervals were subsequently materialized and validated; per-run statuses below preserve the original planning snapshot.",
+  "runs": [
+    {
+      "chunk": 1,
+      "start": "2023-03-23",
+      "end": "2023-03-27",
+      "planning_dry_run_bytes": "2417678320",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 2,
+      "start": "2023-03-27",
+      "end": "2023-04-01",
+      "planning_dry_run_bytes": "2255524728",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 3,
+      "start": "2023-04-01",
+      "end": "2023-04-07",
+      "planning_dry_run_bytes": "2450488316",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 4,
+      "start": "2023-04-07",
+      "end": "2023-04-13",
+      "planning_dry_run_bytes": "2483792232",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 5,
+      "start": "2023-04-13",
+      "end": "2023-04-16",
+      "planning_dry_run_bytes": "1561837404",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 6,
+      "start": "2023-04-16",
+      "end": "2023-04-19",
+      "planning_dry_run_bytes": "1850990148",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 7,
+      "start": "2023-04-19",
+      "end": "2023-04-22",
+      "planning_dry_run_bytes": "1602793500",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 8,
+      "start": "2023-04-22",
+      "end": "2023-04-25",
+      "planning_dry_run_bytes": "1581724128",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 9,
+      "start": "2023-04-25",
+      "end": "2023-05-01",
+      "planning_dry_run_bytes": "2587138308",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 10,
+      "start": "2023-05-01",
+      "end": "2023-05-06",
+      "planning_dry_run_bytes": "2091836148",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 11,
+      "start": "2023-05-06",
+      "end": "2023-05-11",
+      "planning_dry_run_bytes": "2091673160",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 12,
+      "start": "2023-05-11",
+      "end": "2023-05-21",
+      "planning_dry_run_bytes": "3415838680",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 13,
+      "start": "2023-05-21",
+      "end": "2023-06-01",
+      "planning_dry_run_bytes": "3905599508",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 14,
+      "start": "2023-06-01",
+      "end": "2023-06-08",
+      "planning_dry_run_bytes": "2570401420",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 15,
+      "start": "2023-06-08",
+      "end": "2023-06-16",
+      "planning_dry_run_bytes": "2873835740",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 16,
+      "start": "2023-06-16",
+      "end": "2023-06-24",
+      "planning_dry_run_bytes": "2769235468",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 17,
+      "start": "2023-06-24",
+      "end": "2023-07-01",
+      "planning_dry_run_bytes": "2437889180",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 18,
+      "start": "2023-07-01",
+      "end": "2023-07-16",
+      "planning_dry_run_bytes": "4797691144",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 19,
+      "start": "2023-07-16",
+      "end": "2023-08-01",
+      "planning_dry_run_bytes": "4657893080",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 20,
+      "start": "2023-08-01",
+      "end": "2023-08-16",
+      "planning_dry_run_bytes": "4230375724",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 21,
+      "start": "2023-08-16",
+      "end": "2023-09-01",
+      "planning_dry_run_bytes": "4253913868",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 22,
+      "start": "2023-09-01",
+      "end": "2023-09-16",
+      "planning_dry_run_bytes": "3582028268",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 23,
+      "start": "2023-09-16",
+      "end": "2023-10-01",
+      "planning_dry_run_bytes": "4182381128",
+      "status": "planned_not_executed"
+    },
+    {
+      "chunk": 24,
+      "start": "2023-10-01",
+      "end": "2023-10-02",
+      "planning_dry_run_bytes": "391265436",
+      "status": "planned_not_executed"
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+{
+  "generated_at": "2026-08-13",
+  "sampling_method": "first two, deterministic middle, and last two corrected events from chunk 21",
+  "sample_size": 5,
+  "corrected_transfer_sample_dry_run_bytes": "193440",
+  "raw_match_jobs": [
+    {"date": "2023-09-16", "dry_run_upper_bound_bytes": "1532300697", "sample_rows": 2},
+    {"date": "2023-09-21", "dry_run_upper_bound_bytes": "1965417704", "sample_rows": 1},
+    {"date": "2023-09-24", "dry_run_upper_bound_bytes": "1644473956", "sample_rows": 2}
+  ],
+  "all_samples_have_exactly_one_raw_match": true,
+  "all_samples_match_transaction_recipient_amount_and_timestamp": true,
+  "samples": [
+    {
+      "sample_label": "first",
+      "transaction_hash": "0x83a3cd3d2cc0ec089694d88ea84c27fbe9bafd4e10142d5db1f87c72ed994ab5",
+      "recipient": "0xd3974902e1ab1e013087df92567990f14e0950ea",
+      "timestamp": "2023-09-16 00:16:33.000000 UTC",
+      "transfer_log_index": 0,
+      "raw_claim_log_index": 2,
+      "amount_raw": "3000000000000000000000",
+      "amount_arb": "3000",
+      "raw_match_rows": 1,
+      "exact_raw_claim_match": true,
+      "block_explorer_check": "not_performed"
+    },
+    {
+      "sample_label": "second",
+      "transaction_hash": "0x8b7ec9c0a6fe742f9cac7c923cc46cf6d87f024a9b8a8497cf5f1edf3a26333f",
+      "recipient": "0x7eb84e42059f0d44269c50f4d3a280fd307a6824",
+      "timestamp": "2023-09-16 00:23:04.000000 UTC",
+      "transfer_log_index": 0,
+      "raw_claim_log_index": 2,
+      "amount_raw": "875000000000000000000",
+      "amount_arb": "875",
+      "raw_match_rows": 1,
+      "exact_raw_claim_match": true,
+      "block_explorer_check": "not_performed"
+    },
+    {
+      "sample_label": "middle",
+      "transaction_hash": "0x5aed9cca5f9db30124de7a12823b13caf8aea6168c27d82cdd7c2393224d348c",
+      "recipient": "0x9f9a1937cfdfedbe1bee0fbba18d29538a9b28fa",
+      "timestamp": "2023-09-21 18:13:15.000000 UTC",
+      "transfer_log_index": 1,
+      "raw_claim_log_index": 3,
+      "amount_raw": "3250000000000000000000",
+      "amount_arb": "3250",
+      "raw_match_rows": 1,
+      "exact_raw_claim_match": true,
+      "block_explorer_check": "not_performed"
+    },
+    {
+      "sample_label": "penultimate",
+      "transaction_hash": "0x44435c5f679b7ca3763d7582f1b9f2e26b998daad0eca1a0699ebda33ae88370",
+      "recipient": "0x1619f6b74c829f6497b032836df211227a1bd9fc",
+      "timestamp": "2023-09-24 19:59:00.000000 UTC",
+      "transfer_log_index": 21,
+      "raw_claim_log_index": 23,
+      "amount_raw": "3250000000000000000000",
+      "amount_arb": "3250",
+      "raw_match_rows": 1,
+      "exact_raw_claim_match": true,
+      "block_explorer_check": "not_performed"
+    },
+    {
+      "sample_label": "last",
+      "transaction_hash": "0xeca14ec78ac551d757437f40c8920c39be5a526695a74e78ed2d29f977d7de02",
+      "recipient": "0xb350df7feaeb8e6fb8801b3528381f6545941e54",
+      "timestamp": "2023-09-24 20:12:52.000000 UTC",
+      "transfer_log_index": 8,
+      "raw_claim_log_index": 10,
+      "amount_raw": "1125000000000000000000",
+      "amount_arb": "1125",
+      "raw_match_rows": 1,
+      "exact_raw_claim_match": true,
+      "block_explorer_check": "passed",
+      "block_explorer_url": "https://arbiscan.io/tx/0xeca14ec78ac551d757437f40c8920c39be5a526695a74e78ed2d29f977d7de02"
+    }
+  ]
+}

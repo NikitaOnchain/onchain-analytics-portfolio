@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "generated_at": "2026-08-23",
+  "scope": "Public-v1 portable report English-locale finalization.",
+  "status": "passed",
+  "locale": "en-US",
+  "time_zone": "UTC",
+  "html": "reports/arb_airdrop_report.html",
+  "html_sha256": "f0ac2c2421f3ae235bdbacd424b68dfca31995bf74ebe93bb76e441f8ddd790d",
+  "formatter_examples": {
+    "resolved_number_locale": "en-US",
+    "resolved_date_locale": "en-US",
+    "compact_recipients": "583.14K",
+    "compact_claimed_arb": "1.09B",
+    "percent_example": "85.5%",
+    "date_example": "Aug 23, 2026",
+    "number_to_locale_string": "583.14K"
+  },
+  "checks": {
+    "html_declares_english_language": true,
+    "locale_guard_is_unique": true,
+    "locale_guard_precedes_reader": true,
+    "embedded_artifact_payload_is_unchanged": true,
+    "compact_recipients_uses_english_suffix": true,
+    "compact_claimed_arb_uses_english_suffix": true,
+    "percent_uses_english_decimal_separator": true,
+    "generated_date_uses_english_month": true,
+    "number_to_locale_string_uses_english_suffix": true,
+    "formatter_examples_match_expected": true,
+    "no_cyrillic_text_in_final_html": true
+  },
+  "defect_counters": {
+    "failed_checks": 0,
+    "cyrillic_findings": 0,
+    "payload_mutations": 0,
+    "external_operations": 0
+  },
+  "failed_checks": [],
+  "external_operations": {
+    "bigquery": 0,
+    "rpc": 0,
+    "metadata_network": 0,
+    "execute_or_resume": 0,
+    "billing_or_configuration_changes": 0
+  }
+}

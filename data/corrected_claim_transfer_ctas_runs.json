@@ -1,0 +1,30 @@
+{
+  "generated_at": "2026-08-13",
+  "grain": "one record per materialized corrected-cohort interval",
+  "planning_limit_bytes": "8589934592",
+  "all_intervals_below_planning_limit": true,
+  "all_interval_profiles_matched_saved_results": true,
+  "runs": [
+    {"chunk": 1, "start": "2023-03-23", "end": "2023-03-27", "ctas_dry_run_bytes": "4761802120", "profile_dry_run_bytes": "85091360", "event_rows": "531821", "distinct_transactions": "531821", "amount_arb": "995857625"},
+    {"chunk": 2, "start": "2023-03-27", "end": "2023-04-01", "ctas_dry_run_bytes": "4764410872", "profile_dry_run_bytes": "88335680", "event_rows": "20277", "distinct_transactions": "20277", "amount_arb": "37387125"},
+    {"chunk": 3, "start": "2023-04-01", "end": "2023-04-07", "ctas_dry_run_bytes": "4757091694", "profile_dry_run_bytes": "89602400", "event_rows": "7917", "distinct_transactions": "7917", "amount_arb": "14883250"},
+    {"chunk": 4, "start": "2023-04-07", "end": "2023-04-13", "ctas_dry_run_bytes": "4453146024", "profile_dry_run_bytes": "90223360", "event_rows": "3881", "distinct_transactions": "3881", "amount_arb": "7267625"},
+    {"chunk": 5, "start": "2023-04-13", "end": "2023-04-19", "ctas_dry_run_bytes": "8413930830", "profile_dry_run_bytes": "90908960", "event_rows": "4285", "distinct_transactions": "4285", "amount_arb": "8135000"},
+    {"chunk": 6, "start": "2023-04-19", "end": "2023-04-22", "ctas_dry_run_bytes": "5226725426", "profile_dry_run_bytes": "91099520", "event_rows": "1191", "distinct_transactions": "1191", "amount_arb": "2323875"},
+    {"chunk": 7, "start": "2023-04-22", "end": "2023-04-25", "ctas_dry_run_bytes": "3973982587", "profile_dry_run_bytes": "91225440", "event_rows": "787", "distinct_transactions": "787", "amount_arb": "1361750"},
+    {"chunk": 8, "start": "2023-04-25", "end": "2023-05-01", "ctas_dry_run_bytes": "7141749855", "profile_dry_run_bytes": "91441440", "event_rows": "1350", "distinct_transactions": "1350", "amount_arb": "2393250"},
+    {"chunk": 9, "start": "2023-05-01", "end": "2023-05-06", "ctas_dry_run_bytes": "6138487793", "profile_dry_run_bytes": "91622240", "event_rows": "1130", "distinct_transactions": "1130", "amount_arb": "1877375"},
+    {"chunk": 10, "start": "2023-05-06", "end": "2023-05-11", "ctas_dry_run_bytes": "5311570979", "profile_dry_run_bytes": "91727840", "event_rows": "660", "distinct_transactions": "660", "amount_arb": "1454250"},
+    {"chunk": 11, "start": "2023-05-11", "end": "2023-05-21", "ctas_dry_run_bytes": "6636767357", "profile_dry_run_bytes": "91892640", "event_rows": "1030", "distinct_transactions": "1027", "amount_arb": "1924250"},
+    {"chunk": 12, "start": "2023-05-21", "end": "2023-06-01", "ctas_dry_run_bytes": "6995471397", "profile_dry_run_bytes": "92047840", "event_rows": "970", "distinct_transactions": "970", "amount_arb": "1907625"},
+    {"chunk": 13, "start": "2023-06-01", "end": "2023-06-16", "ctas_dry_run_bytes": "8546563884", "profile_dry_run_bytes": "92224160", "event_rows": "1102", "distinct_transactions": "1102", "amount_arb": "2197000"},
+    {"chunk": 14, "start": "2023-06-16", "end": "2023-06-24", "ctas_dry_run_bytes": "4626324569", "profile_dry_run_bytes": "92305600", "event_rows": "509", "distinct_transactions": "509", "amount_arb": "1089000"},
+    {"chunk": 15, "start": "2023-06-24", "end": "2023-07-01", "ctas_dry_run_bytes": "4177537937", "profile_dry_run_bytes": "92371360", "event_rows": "411", "distinct_transactions": "411", "amount_arb": "916500"},
+    {"chunk": 16, "start": "2023-07-01", "end": "2023-07-16", "ctas_dry_run_bytes": "7783207743", "profile_dry_run_bytes": "92520000", "event_rows": "929", "distinct_transactions": "929", "amount_arb": "1803000"},
+    {"chunk": 17, "start": "2023-07-16", "end": "2023-08-01", "ctas_dry_run_bytes": "7034761780", "profile_dry_run_bytes": "92653920", "event_rows": "837", "distinct_transactions": "837", "amount_arb": "1721750"},
+    {"chunk": 18, "start": "2023-08-01", "end": "2023-08-16", "ctas_dry_run_bytes": "5656330082", "profile_dry_run_bytes": "92771840", "event_rows": "737", "distinct_transactions": "737", "amount_arb": "1515250"},
+    {"chunk": 19, "start": "2023-08-16", "end": "2023-09-01", "ctas_dry_run_bytes": "6847443268", "profile_dry_run_bytes": "92891840", "event_rows": "750", "distinct_transactions": "750", "amount_arb": "1582250"},
+    {"chunk": 20, "start": "2023-09-01", "end": "2023-09-16", "ctas_dry_run_bytes": "4656872284", "profile_dry_run_bytes": "93108480", "event_rows": "1354", "distinct_transactions": "1354", "amount_arb": "2623000"},
+    {"chunk": 21, "start": "2023-09-16", "end": "2023-10-01", "ctas_dry_run_bytes": "4735153829", "profile_dry_run_bytes": "93301920", "event_rows": "1209", "distinct_transactions": "1206", "amount_arb": "2590750"}
+  ]
+}

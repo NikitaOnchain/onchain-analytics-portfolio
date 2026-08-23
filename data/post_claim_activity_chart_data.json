@@ -1,0 +1,202 @@
+{
+  "generated_at": "2026-08-19",
+  "source_query": "sql/75_export_post_claim_activity_chart_data.sql",
+  "dry_run_bytes": 41562752,
+  "cohort": "2023-03-23 through 2023-09-24 claim cohort",
+  "activity_definition": "Successful top-level Arbitrum transactions initiated by the validated claim recipient after exact claim order",
+  "interpretation_limit": "Address activity; not proof of retained human usage, protocol engagement, token retention, or sales",
+  "claim_size_segment_policy": {
+    "method": "Reuse the observed approximate cohort quartile boundaries from the early-outflow chart data",
+    "cutpoints_arb": [875, 1250, 2250],
+    "observed_minimum_claim_amount_arb": 625,
+    "observed_maximum_claim_amount_arb": 10250
+  },
+  "window_summary": [
+    {
+      "window_order": 1,
+      "window_label": "Within 24 hours",
+      "recipient_count": 583137,
+      "active_recipients": 482559,
+      "inactive_recipients": 100578,
+      "active_recipient_rate": 0.8275225204368785,
+      "inactive_recipient_rate": 0.17247747956312154,
+      "successful_transaction_rows": 1438840,
+      "average_transactions_per_recipient": 2.4674133179681617,
+      "average_transactions_per_active_recipient": 2.981687213377017
+    },
+    {
+      "window_order": 2,
+      "window_label": "Within 7 days",
+      "recipient_count": 583137,
+      "active_recipients": 530248,
+      "inactive_recipients": 52889,
+      "active_recipient_rate": 0.909302616709281,
+      "inactive_recipient_rate": 0.090697383290719,
+      "successful_transaction_rows": 3872570,
+      "average_transactions_per_recipient": 6.640926574715719,
+      "average_transactions_per_active_recipient": 7.303318447217151
+    }
+  ],
+  "claim_size_segments": [
+    {
+      "segment_order": 1,
+      "claim_size_segment": "625–875 ARB",
+      "minimum_claim_amount_arb": 625,
+      "maximum_claim_amount_arb": 875,
+      "recipient_count": 187754,
+      "recipient_share": 0.32197236669942053,
+      "claimed_arb": 140067500,
+      "claimed_share": "0.12817169292233839047264784457337793389",
+      "active_recipients_24h": 156432,
+      "active_recipient_rate_24h": 0.8331753251595172,
+      "activity_transaction_rows_24h": 342508,
+      "average_transactions_per_active_recipient_24h": 2.1895008693873375,
+      "active_recipients_7d": 171162,
+      "active_recipient_rate_7d": 0.9116290465183166,
+      "activity_transaction_rows_7d": 741278,
+      "average_transactions_per_active_recipient_7d": 4.33085614797677,
+      "average_active_utc_days_per_active_recipient_7d": 1.6867470583423891,
+      "average_distinct_targets_per_active_recipient_7d": 2.577306878863299
+    },
+    {
+      "segment_order": 2,
+      "claim_size_segment": "1,125–1,250 ARB",
+      "minimum_claim_amount_arb": 1125,
+      "maximum_claim_amount_arb": 1250,
+      "recipient_count": 112803,
+      "recipient_share": 0.1934416783706059,
+      "claimed_arb": 132374625,
+      "claimed_share": "0.12113216689246041060146237480114365561",
+      "active_recipients_24h": 91743,
+      "active_recipient_rate_24h": 0.813302837690487,
+      "activity_transaction_rows_24h": 218020,
+      "average_transactions_per_active_recipient_24h": 2.3764210893474162,
+      "active_recipients_7d": 101490,
+      "active_recipient_rate_7d": 0.8997101140927103,
+      "activity_transaction_rows_7d": 482242,
+      "average_transactions_per_active_recipient_7d": 4.751620849344763,
+      "average_active_utc_days_per_active_recipient_7d": 1.7156370085722732,
+      "average_distinct_targets_per_active_recipient_7d": 2.7175879396984923
+    },
+    {
+      "segment_order": 3,
+      "claim_size_segment": "1,500–2,250 ARB",
+      "minimum_claim_amount_arb": 1500,
+      "maximum_claim_amount_arb": 2250,
+      "recipient_count": 156942,
+      "recipient_share": 0.2691340113901193,
+      "claimed_arb": 287430375,
+      "claimed_share": "0.26301917119283609295839218383042272158",
+      "active_recipients_24h": 131073,
+      "active_recipient_rate_24h": 0.8351684061627862,
+      "activity_transaction_rows_24h": 420967,
+      "average_transactions_per_active_recipient_24h": 3.2116988243192726,
+      "active_recipients_7d": 143216,
+      "active_recipient_rate_7d": 0.9125409386907265,
+      "activity_transaction_rows_7d": 1270559,
+      "average_transactions_per_active_recipient_7d": 8.87162747179086,
+      "average_active_utc_days_per_active_recipient_7d": 1.9167341637805833,
+      "average_distinct_targets_per_active_recipient_7d": 3.3495349681599822
+    },
+    {
+      "segment_order": 4,
+      "claim_size_segment": "2,500–10,250 ARB",
+      "minimum_claim_amount_arb": 2500,
+      "maximum_claim_amount_arb": 10250,
+      "recipient_count": 125638,
+      "recipient_share": 0.21545194353985428,
+      "claimed_arb": 532939000,
+      "claimed_share": "0.48767696899236510596749759679505568893",
+      "active_recipients_24h": 103311,
+      "active_recipient_rate_24h": 0.8222910266002325,
+      "activity_transaction_rows_24h": 457345,
+      "average_transactions_per_active_recipient_24h": 4.426876131292892,
+      "active_recipients_7d": 114380,
+      "active_recipient_rate_7d": 0.9103933523297092,
+      "activity_transaction_rows_7d": 1378491,
+      "average_transactions_per_active_recipient_7d": 12.051853470886519,
+      "average_active_utc_days_per_active_recipient_7d": 2.3995016611295683,
+      "average_distinct_targets_per_active_recipient_7d": 4.763140409162441
+    }
+  ],
+  "first_activity_timing": [
+    {
+      "bucket_order": 1,
+      "timing_bucket": "Within 1 hour",
+      "recipient_count": 378291,
+      "recipient_share": 0.6487171968165285
+    },
+    {
+      "bucket_order": 2,
+      "timing_bucket": "1 to <6 hours",
+      "recipient_count": 70216,
+      "recipient_share": 0.12041081255348228
+    },
+    {
+      "bucket_order": 3,
+      "timing_bucket": "6 to <24 hours",
+      "recipient_count": 34052,
+      "recipient_share": 0.058394511066867646
+    },
+    {
+      "bucket_order": 4,
+      "timing_bucket": "1 to <3 days",
+      "recipient_count": 23618,
+      "recipient_share": 0.04050163169203806
+    },
+    {
+      "bucket_order": 5,
+      "timing_bucket": "3 to <7 days",
+      "recipient_count": 24071,
+      "recipient_share": 0.04127846458036448
+    },
+    {
+      "bucket_order": 6,
+      "timing_bucket": "No activity within 7d",
+      "recipient_count": 52889,
+      "recipient_share": 0.090697383290719
+    }
+  ],
+  "activity_intensity_7d": [
+    {
+      "bucket_order": 1,
+      "transaction_count_bucket": "No activity within 7d",
+      "recipient_count": 52889,
+      "recipient_share": 0.090697383290719,
+      "successful_transaction_rows": 0,
+      "successful_transaction_share": 0
+    },
+    {
+      "bucket_order": 2,
+      "transaction_count_bucket": "1 transaction",
+      "recipient_count": 164317,
+      "recipient_share": 0.28178112519013543,
+      "successful_transaction_rows": 164317,
+      "successful_transaction_share": 0.042430995437138644
+    },
+    {
+      "bucket_order": 3,
+      "transaction_count_bucket": "2–5 transactions",
+      "recipient_count": 235591,
+      "recipient_share": 0.4040062626792675,
+      "successful_transaction_rows": 679255,
+      "successful_transaction_share": 0.17540160668496632
+    },
+    {
+      "bucket_order": 4,
+      "transaction_count_bucket": "6–10 transactions",
+      "recipient_count": 61918,
+      "recipient_share": 0.106180880307715,
+      "successful_transaction_rows": 468542,
+      "successful_transaction_share": 0.12098993691527848
+    },
+    {
+      "bucket_order": 5,
+      "transaction_count_bucket": "11+ transactions",
+      "recipient_count": 68422,
+      "recipient_share": 0.11733434853216311,
+      "successful_transaction_rows": 2560456,
+      "successful_transaction_share": 0.6611774609626165
+    }
+  ]
+}

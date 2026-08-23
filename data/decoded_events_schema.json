@@ -1,0 +1,74 @@
+[
+  {
+    "ordinal_position": "1",
+    "column_name": "block_hash",
+    "data_type": "STRING",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "2",
+    "column_name": "block_number",
+    "data_type": "INT64",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "3",
+    "column_name": "block_timestamp",
+    "data_type": "TIMESTAMP",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "4",
+    "column_name": "transaction_hash",
+    "data_type": "STRING",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "5",
+    "column_name": "transaction_index",
+    "data_type": "INT64",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "6",
+    "column_name": "log_index",
+    "data_type": "INT64",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "7",
+    "column_name": "address",
+    "data_type": "STRING",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "8",
+    "column_name": "event_hash",
+    "data_type": "STRING",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "9",
+    "column_name": "event_signature",
+    "data_type": "STRING",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "10",
+    "column_name": "topics",
+    "data_type": "ARRAY<STRING>",
+    "is_nullable": "NO"
+  },
+  {
+    "ordinal_position": "11",
+    "column_name": "args",
+    "data_type": "JSON",
+    "is_nullable": "YES"
+  },
+  {
+    "ordinal_position": "12",
+    "column_name": "removed",
+    "data_type": "BOOL",
+    "is_nullable": "YES"
+  }
+]

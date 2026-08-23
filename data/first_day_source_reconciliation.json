@@ -1,0 +1,21 @@
+[
+  {
+    "reconciliation_level": "aggregate",
+    "raw_claim_event_rows": "422480",
+    "decoded_transfer_event_rows": "422480",
+    "event_row_difference": "0",
+    "raw_distinct_transactions": "422480",
+    "decoded_distinct_transactions": "422480",
+    "transaction_count_difference": "0",
+    "raw_distinct_recipients": "422480",
+    "decoded_distinct_recipients": "422480",
+    "recipient_count_difference": "0",
+    "first_timestamp_match": true,
+    "last_timestamp_match": true,
+    "raw_total_arb": "802591375",
+    "decoded_total_arb": "802591375",
+    "total_arb_difference": "0",
+    "status": "aggregate_match",
+    "remaining_check": "completed in first_day_row_level_reconciliation.json"
+  }
+]

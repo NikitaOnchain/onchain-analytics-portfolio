@@ -1,0 +1,74 @@
+# Python and notebooks
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.venv/
+venv/
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+.codex/config.toml
+credentials*.json
+service-account*.json
+*-credentials.json
+gcp-key*.json
+*.pem
+*.key
+
+# Large local data and database files
+data/raw/
+data/processed/
+*.parquet
+*.feather
+*.db
+*.sqlite
+*.duckdb
+
+# Editors and operating systems
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary files
+.cache/
+*.tmp
+*.temp
+*.log
+*.bak
+~$*
+
+# Local analysis state and experimental artifacts
+AGENTS.md
+STATUS.md
+*checkpoint*.json
+*build_progress*.json
+data/public_v1_release_*
+data/public_v1_corrective_release_*
+data/public_v1_report_delivery_receipt.json
+data/public_v1_report_share_readiness_audit.json
+reports/public_v1_balance_proxy_integration_plan.md
+
+# Experimental symmetric pre/post pipeline
+data/symmetric_behavior_*
+data/symmetric_behavior_pipeline/
+reports/symmetric_behavior_pipeline_runbook.md
+scripts/SymmetricBehaviorPipeline.psm1
+scripts/migrate_symmetric_behavior_storage_split.ps1
+scripts/run_symmetric_behavior_pipeline.ps1
+scripts/symmetric_behavior_sql_manifest.json
+sql/*symmetric_behavior*
+sql/generated/symmetric_behavior/
+tests/Run-SymmetricBehaviorChunk03SqlRegression.ps1
+tests/Run-SymmetricBehaviorExceptionBoundaryRegression.ps1
+tests/Run-SymmetricBehaviorFixedMetadataRegression.ps1
+tests/Run-SymmetricBehaviorNativeStdinRegression.ps1
+tests/Run-SymmetricBehaviorPipelineTests.ps1
+tests/Run-SymmetricBehaviorStorageGateScheduleRegression.ps1
+tests/fixtures/Invoke-NativeStdinDryRunRunner.ps1
+tests/fixtures/Invoke-NativeThrowingDryRunRunner.ps1
+tests/fixtures/Invoke-ThrowingDryRunRunner.ps1
+tests/fixtures/symmetric_behavior_mock_fixture.json
