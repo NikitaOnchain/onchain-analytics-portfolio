@@ -4,6 +4,15 @@ An open, reproducible onchain analysis of the quality of the ARB airdrop.
 
 By [Nikita Onchain](https://github.com/NikitaOnchain).
 
+## TL;DR for protocol teams
+
+- **Question:** Did ARB airdrop recipients keep their tokens and stay active on Arbitrum?
+- **Answer:** Most claimed ARB left quickly, but most recipients stayed active. 78.8% of 583,137 recipients moved ARB out within 24 hours, and after 30 days only about 14% of claimed ARB was still held (balance proxy). At the same time, 90.9% made at least one transaction within 7 days.
+- **Why it matters:** Address activity after a claim is not token retention. To judge an airdrop, measure both separately.
+- **Reusable method:** The same approach works for any token claim: a validated recipient cohort, outflow and activity windows, and balance proxies.
+
+**Want this analysis for your protocol?** Telegram [@nikonchaintg](https://t.me/nikonchaintg) · X [@NikitaOnchain](https://x.com/NikitaOnchain)
+
 The project examines whether different groups of claimers retained ARB and remained active on Arbitrum after claiming. It combines documented SQL, data-quality checks, reproducible charts, methodology, limitations, and decision-oriented findings.
 
 ## Current status
